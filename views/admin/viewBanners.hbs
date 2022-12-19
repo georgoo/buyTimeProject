@@ -1,0 +1,108 @@
+<div class="table-responsive main" id="main"> 
+
+  {{#if bannerAddedMessage}}
+  <h4 id="bannerAddedMessage" class="text-success">{{bannerAddedMessage}}</h4>
+  {{/if}}
+    <div class="text-end mb-3">
+    <a class="btn btn-success btn-lg mb-4 "  href="/admin/add-banner">Add Banner</a>
+                            
+                        </div>
+    <table class="table mt-5 table-striped border" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each banners}}
+            <tr>
+                <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td><img height="50px" width="50px" src="/images/banner-images/{{this.img}}" alt="">
+                </td>
+
+                <td>
+
+                    <a style="color: white; text-decoration: none;" href="/admin/deleteBanner/{{this._id}}"
+                        onclick="return confirm('do you want to delete the banner')"><button
+                            class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+            {{/each}}
+
+            <!-- Modal -->
+
+            
+
+        </tbody>
+    </table>
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{inc @index}}" class="active" aria-current="true" aria-label="Slide 1"></button>
+    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> --}}
+    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/images/banner-images/{{this.img}}" class="d-block w-100" alt="...">
+    </div>
+   
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<ul class="pagination justify-content-center">
+
+
+  {{#ifEquals '1' results.currentPage }}
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/banners/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{else}}
+  <li class="page-item ">
+    <a class="page-link" href="/admin/banners/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{/ifEquals}}
+  {{#each results.pages}}
+  {{#ifEquals ../currentPage this }}
+
+  <li class="page-item active"><a class="page-link" href="/admin/banners/?page={{../this}}">{{../this}}</a></li>
+  {{else}}
+  <li class="page-item active"><a class="page-link" href="/admin/banners/?page={{../this}}">{{../this}}</a></li>
+  {{/ifEquals}}
+  {{/each}}
+  {{#ifEquals results.pageCount results.currentPage }}
+
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/banners/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{else}}
+  <li class="page-item">
+    <a class="page-link" href="/admin/banners/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{/ifEquals}}
+
+
+</ul>
+
+<script>
+
+  
+  setTimeout(function(){$("#bannerAddedMessage").remove();},2000) 
+</script> 

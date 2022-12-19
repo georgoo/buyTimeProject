@@ -1,0 +1,115 @@
+<div class="page-content">
+                <div class="container">
+                    <div class="product-details-top">
+                        <div class="row">
+                             <div class="col-md-6">
+                                <div class="product-gallery product-gallery-vertical ">
+                                    <div class="row ">
+                                        <figure class="product-main-image">
+                                            <img id="product-zoom" src="/images/product-images/{{product.img.[0]}}" data-zoom-image="/images/product-images/{{product.img.[0]}}" alt="product image">
+
+                                            <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                                <i class="icon-arrows"></i>
+                                            </a>
+                                        </figure><!-- End .product-main-image -->
+
+                                        <div id="product-zoom-gallery" class="product-image-gallery">
+                                            <a class="product-gallery-item active" href="#" data-image="/images/product-images/{{product.img.[0]}}" data-zoom-image="/images/product-images/{{product.img.[0]}}">
+                                                <img id="product-zoom" src="/images/product-images/{{product.img.[0]}}" alt="product side">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[1]}}" data-zoom-image="/images/product-images/{{product.img.[1]}}">
+                                                <img src="/images/product-images/{{product.img.[1]}}" alt="product cross">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[2]}}" data-zoom-image="/images/product-images/{{product.img.[2]}}">
+                                                <img src="/images/product-images/{{product.img.[2]}}" alt="product cross">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[3]}}" data-zoom-image="/images/product-images/{{product.img.[3]}}">
+                                                <img src="/images/product-images/{{product.img.[3]}}" alt="product with model">
+                                            </a>
+                                            <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[4]}}" data-zoom-image="/images/product-images/{{product.img.[4]}}">
+                                                <img src="/images/product-images/{{product.img.[4]}}" alt="product with model">
+                                            </a>
+
+                                            
+                                        </div><!-- End .product-image-gallery -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .product-gallery -->
+                            </div><!-- End .col-md-6 -->
+
+                            <div class="col-md-6">
+                                <div class="product-details">
+                                    <h1 class="product-title">{{product.Name}}</h1><!-- End .product-title -->
+
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                                    </div><!-- End .rating-container -->
+
+                                    {{#if product.higherOfferPercentage}}
+                            <h6>Offer Price.{{product.Price}}</h6><br>
+                            <h6>Original Price.<strike>{{product.originalPrice}}</strike></h6>
+                            {{else}}
+                             <h6>Rs.{{product.Price}}</h6>
+                            {{/if}}<!-- End .product-price -->
+
+                                    <div class="product-content">
+                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                                    </div><!-- End .product-content -->
+
+                                   
+
+                                   <ul>
+							<li class="mb-3">
+								Cash on Delivery Eligible.
+							</li>
+							<li class="mb-3">
+								Shipping Speed to Delivery.
+							</li>
+							<li class="mb-3">
+								{{product.Description}}
+							</li>
+							<li class="mb-3">
+								{{product.Category}}
+							</li>
+						</ul>
+
+                                  <p class="my-sm-4 my-3">
+							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+						</p>
+
+                                    <div class="product-details-action">
+                                       <button onclick="addToCart('{{product._id}}')" class="btn btn-danger">Add to cart</button>
+
+                                        <div class="details-action-wrapper">
+                                       <button onclick="addToWishList('{{this._id}}')" class="btn btn-danger">Add to Wishlist</button>
+                                           
+                                        </div><!-- End .details-action-wrapper -->
+                                    </div><!-- End .product-details-action -->
+
+                                   
+                                </div><!-- End .product-details -->
+                            </div><!-- End .col-md-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+
+                    
+
+                    
+
+                    
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+
+<script>
+    $("#product-zoom").ezPlus();
+</script>
+
+

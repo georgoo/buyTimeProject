@@ -1,0 +1,113 @@
+<section style="background-color: #584c58;" class="vh-100">
+    <div class="container  h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body ">
+
+                        <h3 class="text-center">Admin Login</h3>
+                        {{#if aloginErr}}
+                        <p class="text-danger text-center">{{aloginErr}}</p>
+                        {{/if}}
+                        <form action="/admin/adminLogin" method="POST" >
+                           
+
+                            <div class="mt-3">
+                                <label class="form-label" for="email">User Name</label>
+                                <input type="email" id="email" name="email" onkeyup="validateEmail()" class="form-control form-control-lg" />
+                                <span id="ErrorEmail"></span>
+                            </div>
+
+                            
+                            <div class="mt-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" name="adminpassword" class="form-control form-control-lg" onkeyup="validatePassword()" />
+                                <span id="errorPassword"></span>
+                            </div>
+                            <input type="text" style="display: none;" value="true" name="status">
+                            <button class="mt-3 btn btn-primary btn-lg btn-block" type="submit" onclick="return validateForm()">Login</button>
+                        </form>
+                        
+                        <hr class="my-4">
+                        <p style="text-align: center; color:red" id="ErrorSubmit"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+     
+var ErrorEmail=document.getElementById('ErrorEmail');
+
+var ErrorPassword=document.getElementById('errorPassword');
+
+var ErrorSubmit=document.getElementById('ErrorSubmit');
+
+function validatename(){
+    
+    var vname=document.getElementById('name').value;
+    var required=4;
+    var left=required-vname.length;
+
+    if(left>0){
+        ErrorName.innerHTML=left+'More Charecters required';
+        ErrorName.style.color = "red";
+        return false;
+    }    
+    // if(!vname.match(/^[A-Za-z]\s{1}[A-Za-z]$/)){
+    //     ErrorName.innerHTML='Write full Name';
+    //     return false;
+    // }
+    ErrorName.innerHTML='valid';
+    ErrorName.style.color = "green";
+    return true;
+}
+
+function validateEmail(){    
+    var vemail=document.getElementById('email').value;
+    
+    if(vemail.length == 0){
+        ErrorEmail.innerHTML='Email required';
+        ErrorEmail.style.color = "red";
+    
+    }  
+   
+    else if(!vemail.match(/^([\-\.0-9a-zA-Z]+)@([\-\..0-9a-zA-Z]+)\.([a-z]){2,7}$/)){
+        ErrorEmail.innerHTML='Invalid Email ';
+        ErrorEmail.style.color = "red";
+
+        return false;
+    }
+    ErrorEmail.innerHTML='valid';
+    ErrorEmail.style.color = "green";
+    return true;
+}
+
+function validatePassword(){
+    var vPassword = document.getElementById('password').value;
+    var required = 6;
+    var left = required - vPassword.length;
+    if(left>0){
+        ErrorPassword.innerHTML = 'Password is too short';
+        ErrorPassword.style.color = 'red';
+        return false;
+    }
+    ErrorPassword.innerHTML = '';
+    ErrorPassword.style.color = 'green';
+    return true;
+}
+
+
+function validateForm(){
+
+    if(!validatename() || !validateEmail() || !validatemessage() || !validatesubject()){
+        ErrorSubmit.style.display='block';
+        ErrorSubmit.innerHTML='Please fix error';
+        setTimeout(function(){ErrorSubmit.style.display='none';},3000);
+        return false;
+    }
+}
+
+</script>

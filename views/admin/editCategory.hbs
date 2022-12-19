@@ -1,0 +1,67 @@
+<section id="main" class="main">
+
+ <div class="container mt-5">
+    <form class="needs-validation" action=" /admin/editCategory/{{category._id}}" method="post" novalidate="">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Edit Categories</h2><br />
+          <div>
+        <div class="col-sm-12 col-md-7">
+            <label for="">Category Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              value="{{category.name}}"
+              required=""
+            />
+            <div class="invalid-feedback">
+              Please enter a Category Name
+            </div>
+            <label for="">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              name="description"
+              value="{{category.description}}"
+              required=""
+            />
+            <div class="invalid-feedback">
+              Please give a Description
+            </div>
+            <label for="">Category Offer</label>
+            <input
+              type="text"
+              class="form-control"
+              id="categoryOffer"
+              name="categoryOffer"
+              value="{{category.categoryOffer}}"
+              
+            />
+           
+
+            </div>
+            
+            <button
+                class="btn btn-primary float-right mt-4"
+                type="submit" onsubmit="validateform()"
+              >Update</button>
+            
+           
+          </div>
+        </div>
+
+       
+      </div>
+    </form>
+
+  </div>
+
+
+
+
+
+</section>
+

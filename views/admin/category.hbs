@@ -1,0 +1,78 @@
+<section id="main" class="main">
+
+  {{#if editCategoryMessage}}
+  <h3 id="editCategoryMessage" class="text-success">{{editCategoryMessage}}</h3>
+  {{/if}}
+<a href="/admin/addCategory"><button class="btn btn-danger mb-5">Add Category</button></a>
+<table class="table  table-striped cell-border  mt-5" id="myTable">
+ <thead>
+    <tr>
+      <th scope="col">Sl No.</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Category Description</th>
+      <th scope="col">Offer</th>
+      <th scope="col">Option</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {{#each categories}}
+    <tr>
+      <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+      <td>{{this.name}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.categoryOffer}}</td>
+      <td><a href="/admin/editCategory/{{this._id}}"><button class="btn btn-success" >Edit</button></a>
+      <a href="/admin/deleteCategory/{{this._id}}"><button class="btn btn-danger" onclick="return confirm('do you want to delete the Category')">Delete</button></a></td>
+      
+      
+    </tr>
+    {{/each}}
+    
+  </tbody>
+</table>
+
+</section>
+<ul class="pagination justify-content-center">
+
+
+                                {{#ifEquals '1' results.currentPage }}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="/admin/category/?page={{../results.previous.page}}" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                {{else}}
+                                 <li class="page-item ">
+                                    <a class="page-link" href="/admin/category/?page={{../results.previous.page}}" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                {{/ifEquals}}
+									{{#each results.pages}}
+									{{#ifEquals ../currentPage this }}
+
+                                <li class="page-item active"><a class="page-link" href="/admin/category/?page={{../this}}">{{../this}}</a></li>
+                                {{else}}
+                                   <li class="page-item active"><a class="page-link" href="/admin/category/?page={{../this}}">{{../this}}</a></li>
+                                   {{/ifEquals}}
+									{{/each}}
+									{{#ifEquals results.pageCount results.currentPage }}
+                              
+
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="/admin/category/?page={{../results.next.page}}">Next</a>
+                                </li>
+                                {{else}}
+                                  <li class="page-item">
+                                    <a class="page-link" href="/admin/category/?page={{../results.next.page}}">Next</a>
+                                </li>
+                                {{/ifEquals}}
+
+
+							</ul>
+
+{{!-- <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+  src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+<script src="/assets/js/form-valoidation.js"></script> --}}
+
+<script>
+  setTimeout(function() {$("#editCategoryMessage").remove()},2000) 
+</script>

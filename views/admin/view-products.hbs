@@ -1,0 +1,90 @@
+<section id="main" class="main">
+  {{#if editProductMessage}}
+  <h3 id="editProductMessage" class="text-success">{{editProductMessage}}</h3>
+  {{/if}}
+  <div class="container">
+    <div class="mb-4">
+      <div class="row mt-4" style="">
+        <a href="/admin/addproducts" class=" btn-primary btn  ms-auto" style="width :8rem">Add Product</a>
+      </div>
+    </div>
+    <table class="table mt-4 display table-striped  cell-border auto-index" id="myTable">
+      <thead>
+        <tr>
+
+          <th scope="row">SI NO</th>
+          <th scope="row">Name</th>
+          <th scope="row">Category</th>
+          <th scope="row">Stock</th>
+          <th scope="row">Price</th>
+          <th>Image</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each products}}
+        <tr>
+
+
+
+
+          <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+          <td>{{this.Name}}</td>
+          <td> {{this.category }} </td>
+          <td> {{this.Stock }} </td>
+          <td> {{this.originalPrice}} </td>
+
+          {{!-- <td>{{this.salary}}</td> --}}
+          <td><img style="width:50px;height:50px" src="/images/product-images/{{this.img.[0]}}" alt=""></td>
+          <td><a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+            <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+              onclick="return confirm('Do you really want to delete{{this.Name}} ?')">Delete</a>
+          </td>
+        </tr>
+
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<ul class="pagination justify-content-center">
+
+
+  {{#ifEquals '1' results.currentPage }}
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/viewproducts/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{else}}
+  <li class="page-item ">
+    <a class="page-link" href="/admin/viewproducts/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{/ifEquals}}
+  {{#each results.pages}}
+  {{#ifEquals ../currentPage this }}
+
+  <li class="page-item active"><a class="page-link" href="/admin/viewproducts/?page={{../this}}">{{../this}}</a></li>
+  {{else}}
+  <li class="page-item active"><a class="page-link" href="/admin/viewproducts/?page={{../this}}">{{../this}}</a></li>
+  {{/ifEquals}}
+  {{/each}}
+  {{#ifEquals results.pageCount results.currentPage }}
+
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/viewproducts/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{else}}
+  <li class="page-item">
+    <a class="page-link" href="/admin/viewproducts/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{/ifEquals}}
+
+
+</ul>
+
+<script>
+  setTimeout(function () { $("#editProductMessage").remove(); }, 3000) 
+</script>

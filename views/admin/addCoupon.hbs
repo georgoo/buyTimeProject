@@ -1,0 +1,132 @@
+<section id="main" class="main">
+    {{#if addCouponMessage}}
+    <h3 id="addCouponMessage" class="text-success">{{addCouponMessage}}</h3>
+    {{/if}}
+    <div class="container mt-5">
+        <form class="needs-validation" action="/admin/addCoupon" method="post" novalidate="">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Add Coupon</h2><br />
+                    <div>
+                        <div class="col-sm-12 col-md-7">
+                            <label for="">Coupon Code</label>
+                            <input type="text" class="form-control" id="couponCode" name="couponCode" required="" />
+                            <div class="invalid-feedback">
+                                Please enter a Coupon Code
+                            </div>
+                            <label for="">Discount percentage</label>
+                            <input type="text" class="form-control" id="percentage" name="percentage" required="" />
+                            <div class="invalid-feedback">
+                                Please enter a discount percentage
+                            </div>
+                            <label for="">Maximum Amount to be deducted</label>
+                            <input type="text" class="form-control" id="maxAmount" name="maxAmount" required="" />
+                            <div class="invalid-feedback">
+                                Please enter the maximum amount to be deducted.
+                            </div>
+                            <label for="">Expiry Date</label>
+                            <input type="date" class="form-control" id="expiryDate" name="expiryDate" required="" />
+                            <div class="invalid-feedback">
+                                Select an Expiry Date
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-primary float-right mt-4 mb-4" type="submit"
+                            onsubmit="validateform()">Add
+                            +</button>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table mt-5 table-striped border" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Coupon</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Maximum Discount Amount</th>
+                    <th scope="col">Expiry Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each coupon}}
+                <tr>
+                    <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+                    <td>{{this.couponCode}}</td>
+                    <td>{{this.percentage}}</td>
+                    <td>{{this.maxAmount}}</td>
+                    <td>{{this.expiryDate}}</td>
+                    <td>
+                        <a style="color: white; text-decoration: none;" href="/admin/deleteCoupon/{{this._id}}"><button
+                                class="btn btn-danger"
+                                onclick="return confirm('do you want to delete the Coupon')">delete</button></a>
+                    </td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+
+        <script>
+
+            function sweetAlert() {
+
+                Swal.fire('Any fool can use a computer')
+            }
+        </script>
+    </div>
+</section>
+
+<ul class="pagination justify-content-center">
+
+
+  {{#ifEquals '1' results.currentPage }}
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/couponAdding/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{else}}
+  <li class="page-item ">
+    <a class="page-link" href="/admin/couponAdding/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{/ifEquals}}
+  {{#each results.pages}}
+  {{#ifEquals ../currentPage this }}
+
+  <li class="page-item active"><a class="page-link" href="/admin/couponAdding/?page={{../this}}">{{../this}}</a></li>
+  {{else}}
+  <li class="page-item active"><a class="page-link" href="/admin/couponAdding/?page={{../this}}">{{../this}}</a></li>
+  {{/ifEquals}}
+  {{/each}}
+  {{#ifEquals results.pageCount results.currentPage }}
+
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/couponAdding/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{else}}
+  <li class="page-item">
+    <a class="page-link" href="/admin/couponAdding/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{/ifEquals}}
+
+
+</ul>
+
+<script>
+
+   
+
+    setTimeout(function () { $("#addCouponMessage").remove(); }, 3000) 
+</script>

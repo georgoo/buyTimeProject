@@ -1,0 +1,129 @@
+<section id="main" class="main">
+
+  <h1 style="text-align:center ;">Orders</h1>
+
+
+  <div class="table-responsive">
+
+    <table class="table mt-5 table-striped cell-border " id="usersTable myTable">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Date</th>
+          <th scope="col" name="">User</th>
+          <th scope="col">MRP</th>
+          <th scope="col">Price</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Status</th>
+          <th scope="col">Details</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each allOrders}}
+        <tr>
+          <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+          <td class="date">{{this.date}}</td>
+          <td name="{{this.deliveryDetails.firstName}}"> {{this.deliveryDetails.firstName}} </td>
+          <td> {{this.originalPrice}} </td>
+          <td> {{this.totalAmount}} </td>
+          <td>{{this.paymentMethod}}</td>
+          <td>{{this.status}}</td>
+          <td><a href="/admin/view-orders/{{this._id}}">View More</a></td>
+
+          <td>
+            {{#ifEquals this.status 'Cancelled'}}
+            <button style="border-radius: 4px;font-size: 18px;background-color: white; color: black;
+                       border: 2px solid #ff8800; ">Cancelled</button>
+            {{/ifEquals}}
+            {{#ifEquals this.status 'returned'}}
+            <button style="border-radius: 4px;font-size: 18px;background-color: white;color: black;
+                        border: 2px solid #e60303; ">Returned</button>
+            {{/ifEquals}}
+            {{#ifEquals this.status 'delivered'}}
+            <button style="border-radius: 4px;font-size: 18px;background-color: white;color: black;
+                        border: 2px solid #e60303; ">Delivered</button>
+            {{/ifEquals}}
+
+            {{#ifEquals this.status 'placed'}}
+            <form action="/admin/updateOrderStatus/{{../this._id}}" method="post">
+              <div class="input-group ">
+
+
+                <select class="mr-4" id="{{../this._id}}" name="status">
+                  <option id="status" value="{{../this.status}}">{{../this.status}}</option>
+
+                  <option id="shipped" value="shipped">shipped</option>
+                  <option id="delivered" value="delivered">delivered</option>
+
+                </select>
+                <input type="text" name="orderId" value="636c0fde8734e917b5c8b1c0" hidden="">
+                <input type="text" name="userId" value="6362136333993afa2ab851c7" hidden="">
+                <button class="btn btn-success" type="submit">Submit</button>
+              </div>
+            </form>
+            {{/ifEquals}}
+            {{#ifEquals this.status 'shipped'}}
+            <form action="/admin/updateOrderStatus/{{../this._id}}" method="post">
+              <div class="input-group ">
+                <select class="mr-4" id="{{../this._id}}" name="status">
+                  <option id="status" value="{{../this.status}}">{{../this.status}}</option>
+                  <option id="delivered" value="delivered">delivered</option>
+                </select>
+                <input type="text" name="orderId" value="636c0fde8734e917b5c8b1c0" hidden="">
+                <input type="text" name="userId" value="6362136333993afa2ab851c7" hidden="">
+                <button class="btn btn-success" type="submit">Submit</button>
+              </div>
+            </form>
+            {{/ifEquals}}
+          </td>
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+
+  </div>
+</section>
+<ul class="pagination justify-content-center">
+
+
+  {{#ifEquals '1' results.currentPage }}
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/orderManagement/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{else}}
+  <li class="page-item ">
+    <a class="page-link" href="/admin/orderManagement/?page={{../results.previous.page}}" tabindex="-1"
+      aria-disabled="true">Previous</a>
+  </li>
+  {{/ifEquals}}
+  {{#each results.pages}}
+  {{#ifEquals ../currentPage this }}
+
+  <li class="page-item active"><a class="page-link" href="/admin/orderManagement/?page={{../this}}">{{../this}}</a></li>
+  {{else}}
+  <li class="page-item active"><a class="page-link" href="/admin/orderManagement/?page={{../this}}">{{../this}}</a></li>
+  {{/ifEquals}}
+  {{/each}}
+  {{#ifEquals results.pageCount results.currentPage }}
+
+  <li class="page-item disabled">
+    <a class="page-link" href="/admin/orderManagement/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{else}}
+  <li class="page-item">
+    <a class="page-link" href="/admin/orderManagement/?page={{../results.next.page}}">Next</a>
+  </li>
+  {{/ifEquals}}
+
+
+</ul>
+<br>
+ <h5  style="text-align: center; color: #351bc7;">Page N0: {{results.currentPage}}</h5>
+<script>
+
+
+</script>

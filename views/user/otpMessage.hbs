@@ -1,0 +1,61 @@
+<section style="background-color: #978886;" class="vh-100">
+    <div class="container  h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body ">
+                        <h3 class="text-center">OTP Submit</h3>
+                        {{#if signupErr}}
+                        <p class="text-danger text-center">{{signupErr}}</p>
+                        {{/if}}
+                        <form action="/verify" method="post" >
+                            <div class="mt-3">
+                                <input type="hidden" name="phonenumber" value="9847997515" hidden>
+                            </div>
+                            <div class="mt-3">
+                                <label class="form-label" for="phoneNumber">Enter OTP</label>
+                                <input type="phone" id="code" name="code" onkeyup="validatePhoneNumber()"
+                                    class="form-control form-control-lg">
+                                <span id="ErrorPhoneNumber"></span>
+                            </div>
+                            <button class="mt-3 btn btn-primary btn-lg btn-block" type="submit"
+                                onclick="return validateForm()">SUBMIT</button>
+                        </form>
+                        <hr class="my-4">
+                        <p style="text-align: center; color:red" id="ErrorSubmit"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var ErrorPhoneNumber = document.getElementById('ErrorPhoneNumber')
+    var ErrorSubmit = document.getElementById('ErrorSubmit');
+    function validatePhoneNumber() {
+        var vPhoneNumber = document.getElementById('phonenumber').value;
+        var required = 6;
+        var left = required - vPhoneNumber.length;
+        if (left > 0) {
+            ErrorPhoneNumber.innerHTML = 'Password must contain 6 numbers';
+            ErrorPhoneNumber.style.color = 'red';
+            return false;
+        }
+        ErrorPhoneNumber.innerHTML = '';
+        ErrorPhoneNumber.style.color = 'green';
+        return true;
+    }
+
+
+    function validateForm() {
+
+        if (!validatename() || !validateEmail() || !validatemessage() || !validatesubject()) {
+            ErrorSubmit.style.display = 'block';
+            ErrorSubmit.innerHTML = 'Please fix error';
+            setTimeout(function () { ErrorSubmit.style.display = 'none'; }, 3000);
+            return false;
+        }
+    }
+
+</script>

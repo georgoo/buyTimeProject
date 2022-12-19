@@ -1,0 +1,142 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML to PDF</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.min.js"></script>
+
+</head>
+
+<body>
+    <div class="elem p-5">
+
+        <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+            <div class="card">
+                <div class="card-header p-4">
+                    <a class="pt-2 d-inline-block" href="index.html" data-abc="true">MobShop.com</a>
+
+                    {{!-- {{#each orders}} --}}
+                    <div class="float-right">
+                        <h3 class="mb-0">Invoice {{order._id}}</h3>
+                        Date: {{order.date}}
+                    </div>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <h5 class="mb-3">From:</h5>
+                            <h3 class="text-dark mb-1">Watch</h3>
+                            <div>29, Singla Street</div>
+                            <div>Sikeston,New Delhi 110034</div>
+                            <div>Email: contact@mobshop.com</div>
+                            <div>Phone: +91 7558023283</div>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <h5 class="mb-3">To:</h5>
+                            <h3 class="text-dark mb-1"> {{order.deliveryDetails.firstName}} {{order.deliveryDetails.lastName}}</h3>
+                            <div>{{order.deliveryDetails.address}} </div>
+                            <div>{{order.deliveryDetails.country}} {{order.deliveryDetails.city}} </div>
+                            <div>{{order.deliveryDetails.state}} {{order.deliveryDetails.pincode}} </div>
+
+                            <div>Email:{{order.deliveryDetails.email}} </div>
+                        <div>Phone: {{order.deliveryDetails.mobile}}</div>
+                        </div>
+                    </div>
+
+
+                    <strong class="text-dark">
+                       <h1> Total </h1>
+                    </strong>
+                    
+                    {{#if order.totalAmount}}
+                    <h1><strong class="text-dark">Rs. {{order.totalAmount}}</strong></h1>
+                    {{else}}
+                    <h1><strong class="text-dark">Rs. {{order.originalPrice}}</strong></h1>
+                    {{/if}}
+                    {{!-- {{/each}} --}}
+                </div>
+
+                <div class="table-responsive-sm">
+
+
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">#</th>
+                                <th>Item</th>
+                                {{!-- <th>Description</th> --}}
+                                <th class="right">Price</th>
+                                <th class="center">Qty</th>
+                                {{!-- <th class="right">Total</th> --}}
+
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            {{#each orderProducts}}
+                            <tr>
+                                <td class="center"></td>
+
+                                <td class="left strong">{{this.product.Name}}</td>
+                                {{!-- <td class="left">Iphone 10X with headphone</td> --}}
+                                <td class="right">Rs. {{this.product.Price}}</td>
+                                <td class="center">{{this.quantity}}</td>
+                                {{!-- <td class="right">$15,000</td> --}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+                <div class="card-footer bg-white">
+                    <p class="mb-0">Watch.com</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+
+
+        <div class="text-center">
+            <button onclick="invoicePDF()" class="download btn btn-primary ">Download PDF</button>
+        </div>
+
+    </div>
+
+<script>
+     function invoicePDF() {
+            var doc = new jsPDF();
+
+            // We'll make our own renderer to skip this editor
+            var specialElementHandlers = {
+                '#getPDF': function (element,renderer) {
+                    return true;
+                },
+                '.controls': function (element,renderer) {
+                    return true;
+                }
+            };
+
+            // All units are in the set measurement for the document
+            // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
+            doc.fromHTML($('.elem').get(0),15,15,{
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+
+            doc.save('Generated.pdf');
+        }
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,63 @@
+
+<section id="main" class="main">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Edit Product</h2>
+                <form action="/admin/edit-product/{{product._id}}" class="needs-validation" method="post" novalidate="" enctype="multipart/form-data">
+                    <label for="">Name</label>
+                    <input type="text"  name="Name" class="form-control" value="{{product.Name}}" required>
+                     <label for="">Brand</label>
+                   <select class="form-control selectric" name="brand">
+                        <option  value="{{product.brand}}">{{product.brand}}</option>
+                        {{#each brands}}
+                        <option id="brands{{this._id}}" value="{{this.name}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+
+                     <label for="" col-form-label>Category</label>
+                    <select class="form-control selectric" name="category">
+                        {{#each categories}}
+                        <option id="categories{{this._id}}" value="{{this.name}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+
+                    <label for="">Stock</label>
+                    <input type="text" name="Stock" class="form-control" value="{{product.Stock}}" required>
+
+                    <label for="">Price</label>
+                    <input type="text"  name="Price" class="form-control" value="{{product.originalPrice}}" required>
+                    
+                    <label for="">Product Offer</label>
+                    <input type="" name="productOfferPercentage" class="form-control" value="{{product.productOfferPercentage}}" >
+
+                    <label for="">Description</label>
+                    <input type="text"  name="Description" class="form-control" value="{{product.Description}}" required>
+
+                    <label for="">Image</label>
+                    
+                    <img src="/images/product-images/{{product.img.[0]}}" alt="" style="width:100px ; height:auto;"  id="imgView" class="p-2">
+                    <img src="/images/product-images/{{product.img.[1]}}" alt="" style="width:100px ; height:auto;"  id="imgView1" class="p-2">
+                    <img src="/images/product-images/{{product.img.[2]}}" alt="" style="width:100px ; height:auto;"  id="imgView2" class="p-2">
+                    <img src="/images/product-images/{{product.img.[3]}}" alt="" style="width:100px ; height:auto;"  id="imgView3" class="p-2">
+                    
+                   
+                    <input type="file"  class="form-control" value="viewImage(event)"   name="image" onchange="viewImage(event)" multiple>
+
+                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section> 
+
+
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+        document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[1])
+        document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[2])
+        document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[3])
+    }
+</script>

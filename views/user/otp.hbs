@@ -1,0 +1,71 @@
+
+<section style="background-color: #978886;" class="vh-100">
+    <div class="container  h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body ">
+
+                        <h3 class="text-center">OTP Login</h3>
+                        {{#if otpError}}
+                        <p class="text-danger text-center">{{otpError}}</p>
+                        {{/if}}
+                        <form action="/sendcode" method="post">
+                            
+
+                            <div class="mt-3">
+                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                <input type="phone" id="phoneNumber" name="phonenumber" onkeyup="validatePhoneNumber()" class="form-control form-control-lg" >
+                                
+                                <span id="ErrorPhoneNumber"></span>
+                            </div>
+                         <input type="radio"  id="sms"  name="channel" value="sms" checked  hidden>
+                           
+                            <button class="mt-3 btn btn-primary btn-lg btn-block" type="submit" onclick="return validateForm()">Send OTP</button>
+                        </form>
+                        
+                        <hr class="my-4">
+                        <p style="text-align: center; color:red" id="ErrorSubmit"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+     
+var ErrorName=document.getElementById('ErrorName');
+var ErrorEmail=document.getElementById('ErrorEmail');
+var ErrorPhoneNumber = document.getElementById('ErrorPhoneNumber')
+var ErrorSubmit=document.getElementById('ErrorSubmit');
+
+
+
+
+function validatePhoneNumber(){
+    var vPhoneNumber = document.getElementById('phoneNumber').value;
+    var required = 10;
+    var left = required - vPhoneNumber.length;
+    if(left>0){
+        ErrorPhoneNumber.innerHTML = 'invalid phone-number';
+        ErrorPhoneNumber.style.color = 'red';
+        return false;
+    }
+    ErrorPhoneNumber.innerHTML = 'valid';
+    ErrorPhoneNumber.style.color = 'green';
+    return true;
+}
+
+
+function validateForm(){
+
+    if(!validatename() || !validateEmail() || !validatemessage() || !validatesubject()){
+        ErrorSubmit.style.display='block';
+        ErrorSubmit.innerHTML='Please fix error';
+        setTimeout(function(){ErrorSubmit.style.display='none';},3000);
+        return false;
+    }
+}
+
+</script>

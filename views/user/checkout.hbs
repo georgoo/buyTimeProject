@@ -1,0 +1,282 @@
+<section>
+  <div class="container mt-5">
+    {{#ifEquals coupon.couponAppliedMessage 'Coupon Successfully applied'}}
+    <label for="coupon">
+      <h4>Coupon Applied</h4>
+    </label><br>
+    <a href="/removeCoupon" id="removeButton" type="button" class="btn-success"><button
+        class="btn-success">Remove</button></a>
+
+    {{else}}
+
+    <form id="coupon-form">
+      <label for="coupon">
+        <h4>Enter the Coupon Code</h4>
+      </label><br>
+      <input type="text" id="couponId" name="coupon">
+      <button onclick="applyCoupon()" type="submit" id="applyButton" class="btn-success">Apply</button>
+      {{/ifEquals}}
+      <p id="errorCoupon" class=" text-danger display:none"></p>
+    </form>
+
+    <form id="checkout-form">
+      <div class="row ">
+        <div class="col-md-8 ">
+          {{#each addresses}}
+          <div class=" border mb-3" style="width:40rem ;">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="addressId" id="exampleRadios1" value="{{this._id}}"
+                checked>
+              <label class="form-check-label" for="exampleRadios1">
+
+              </label>
+            </div>
+
+            <span>{{this.address.firstName}} {{this.address.lastName}}</span><br>
+            <span>{{this.address.mobile}}</span><br>
+            <span>{{this.address.address}}</span><br>
+            <span>{{this.address.pincode}}</span><br>
+
+
+
+          </div>
+          {{/each}}
+          <button onclick="window.location.href='/addAddress'" type="button" class="btn-primary">Add New
+            Address</button>
+        </div>
+
+        <div class="col-md-4">
+          <div class="container   checkout">
+            <h5>Total Amount: Rs. <span>{{originalPrice}}</span> </h5>
+            <input type="text" value={{originalPrice}} name="originalPrice" hidden>
+            <h5>You've Saved: Rs. <span id="savedAmount">{{savedAmount}}</span> </h5>
+            <input type="text" value={{savedAmount}} name="savedAmount" hidden>
+            <hr />
+
+            <h5>You have to pay: Rs. <span id="totalvalue">{{total}}</span> </h5>
+            <input type="text" value={{total}} name="totalValue" hidden>
+
+            <hr />
+            <div class="payment">
+              <p>Payment method</p>
+              <label for="" class="radio-inline">
+                <input type="radio" name="payment-method" value="COD" checked />COD
+              </label>
+              <label for="" class="radio-inline mt-2">
+                <input type="radio" name="payment-method" value="RAZORPAY" />
+                Razorpay
+              </label>
+              <label for="" class="radio-inline mt-2">
+                <input type="radio" name="payment-method" value="PAYPAL" />
+                Paypal
+              </label>
+              <label for="" class="radio-inline mt-2">
+                <input type="radio" name="payment-method" value="WALLET" onclick="check" />
+                WALLET Amount (Rs.{{ walletAmount.totalWalletAmount}})
+              </label>
+              <button class="btn btn-primary float-right" type="submit">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+
+  $("#coupon-form").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: 'applyCoupon',
+      method: 'post',
+      data: $("#coupon-form").serialize(),
+      success: (response) => {
+
+        if (response.couponFind) {
+          if (response.usedCouponMessage) {
+            swal(response.usedCouponMessage, "", "warning");
+          } else if (response.couponExpiredMessage) {
+
+            swal(response.couponExpiredMessage, "", "warning");
+          } else if (response.couponAppliedMessage) {
+
+            let discountPrice = response.discountPrice
+            let totalPriceAfterOffer = response.totalPriceAfterOffer
+            console.log(totalPriceAfterOffer)
+            console.log(discountPrice)
+            //location.reload()
+            //document.getElementById("").innerHTML=discountPrice
+            document.getElementById("totalvalue").innerHTML = Math.round(totalPriceAfterOffer)
+            document.getElementById("savedAmount").innerHTML = Math.round(discountPrice)
+            swal(response.couponAppliedMessage, "", "success")
+            setTimeout(location.reload.bind(location), 1500);
+
+          }
+        } else if (response.couponNotFound) {
+          swal(response.couponNotFound, "", "warning");
+        }
+
+
+      }
+    })
+  })
+
+  $("#checkout-form").submit((e) => {
+
+    e.preventDefault()
+
+    $.ajax({
+      url: '/place-order',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+        if (response.codSuccess) {
+          location.href = '/order-success'
+        } else if (response.walletNotEnough) {
+          swal("Oops", "Insufficient Balance in Wallet", "error");
+        } else if (response.walletSuccess) {
+          location.href = '/order-success'
+        } else if (response.paypalT) {
+          paypal(response.order)
+        } else {
+          razorpayPayment(response)
+        }
+      }
+    })
+  })
+
+  function removeCoupon() {
+    $.ajax({
+      url: '/removeCoupon/',
+      method: 'get',
+
+      success: (response) => {
+        alert(response)
+      }
+    })
+  }
+
+  function razorpayPayment(order) {
+    var options = {
+      "key": "rzp_test_8qn3kB4rvSeZH8", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Time Zone",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+
+
+        verifyPayment(response, order)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-success'
+        } else {
+          alert('Payment Failed')
+        }
+      }
+    })
+  }
+
+  function paypal(order) {
+    alert('paypal keri')
+
+    $.ajax({
+      url: '/pay',
+      method: 'post',
+      data: {
+        orderId: order
+      },
+      success: (response) => {
+        location.href = response
+      }
+    })
+  }
+
+
+
+
+
+</script>
+
+<style>
+  input[type=radio] {
+    width: 20px;
+    height: 20px;
+  }
+
+  label.radio-inline {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkout {
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 30px;
+  }
+
+  .payment {
+    padding-bottom: 16px;
+  }
+
+  .btn {
+    background: #ff2020;
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 20px 15px;
+    border-radius: 0px;
+    display: inline-block;
+    line-height: 0;
+    cursor: pointer;
+    margin-bottom: 0;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    -moz-user-select: none;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+</style>
+
+
+<script>
+
+</script>
