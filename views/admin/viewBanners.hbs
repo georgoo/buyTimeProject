@@ -1,59 +1,62 @@
-<div class="table-responsive main" id="main"> 
+<div class="table-responsive main" id="main">
 
   {{#if bannerAddedMessage}}
   <h4 id="bannerAddedMessage" class="text-success">{{bannerAddedMessage}}</h4>
   {{/if}}
-    <div class="text-end mb-3">
-    <a class="btn btn-success btn-lg mb-4 "  href="/admin/add-banner">Add Banner</a>
-                            
-                        </div>
-    <table class="table mt-5 table-striped border" id="myTable">
-        <thead>
-            <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Image</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each banners}}
-            <tr>
-                <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.description}}</td>
-                <td><img height="50px" width="50px" src="/images/banner-images/{{this.img}}" alt="">
-                </td>
+  <div class="text-end mb-3">
+    <a class="btn btn-success btn-lg mb-4 " href="/admin/add-banner">Add Banner</a>
 
-                <td>
+  </div>
+  <table class="table mt-5 table-striped border" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each banners}}
+      <tr>
+        <td scope="row">{{indexing @index ../results.currentPage ../results.previous.limit}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.description}}</td>
+        <td><img height="50px" width="50px" src="/images/banner-images/{{this.img}}" alt="">
+        </td>
 
-                    <a style="color: white; text-decoration: none;" href="/admin/deleteBanner/{{this._id}}"
-                        onclick="return confirm('do you want to delete the banner')"><button
-                            class="btn btn-danger">Delete</button></a>
-                </td>
-            </tr>
-            {{/each}}
+        <td>
 
-            <!-- Modal -->
+          <a style="color: white; text-decoration: none;" href="/admin/deleteBanner/{{this._id}}"
+            onclick="return confirm('do you want to delete the banner')"><button
+              class="btn btn-danger">Delete</button></a>
+        </td>
+      </tr>
+      {{/each}}
 
-            
+      <!-- Modal -->
 
-        </tbody>
-    </table>
+
+
+    </tbody>
+  </table>
 </div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{inc @index}}" class="active" aria-current="true" aria-label="Slide 1"></button>
-    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> --}}
-    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{inc @index}}" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+      aria-label="Slide 2"></button> --}}
+    {{!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+      aria-label="Slide 3"></button> --}}
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="/images/banner-images/{{this.img}}" class="d-block w-100" alt="...">
     </div>
-   
+
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,6 +106,6 @@
 
 <script>
 
-  
-  setTimeout(function(){$("#bannerAddedMessage").remove();},2000) 
-</script> 
+
+  setTimeout(function () { $("#bannerAddedMessage").remove(); }, 2000) 
+</script>

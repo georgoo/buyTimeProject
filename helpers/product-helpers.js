@@ -4,7 +4,7 @@ let db=require('../config/connection')
 let objectId=require('mongodb').ObjectId
 
 module.exports={
-
+// To add a product 
     addproduct:async(product,cb)=>{
         product.Price = parseInt(product.Price)
         product.Stock = parseInt(product.Stock)
@@ -68,7 +68,7 @@ module.exports={
             cb(data.insertedId)
         })
     },
-
+// To get all the products
     getAllProducts: (limit, startIndex) => {
         limit = parseInt(limit)
         startIndex=parseInt(startIndex)
@@ -80,6 +80,7 @@ module.exports={
         })
 
     },
+    // To get the product count
     getProductsCount: () => {
         return new Promise(async(resolve,reject)=>{
             let count=await db.get().collection(collection.PRODUCT_COLLECTION).count()
@@ -92,7 +93,7 @@ module.exports={
     
         })  
     },
-
+// To delete a product
     deleteProduct:(proId)=>{
         return new Promise( (resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(proId)}).then((response)=>{
@@ -100,7 +101,7 @@ module.exports={
             })
         })
     },
-
+// To get the product details
     getProductDetails:(proId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
@@ -108,7 +109,7 @@ module.exports={
             })
         })
     },
-
+// Update the product
     updateProduct: async(proId, proDetails) => {
         console.log(proDetails);
 
@@ -211,7 +212,7 @@ module.exports={
             })
         })
     },
-
+// To add the category
     addCategory: (category) => {
         if (category.categoryOffer) {
             
@@ -223,7 +224,7 @@ module.exports={
             })
         })
     },
-
+// To get all categories
     getAllCategories:()=>{
         return new Promise(async(resolve,reject)=>{
            let categories =await db.get().collection(collection.CATEGORY_COLLECTION).find().sort({_id:-1}).toArray()

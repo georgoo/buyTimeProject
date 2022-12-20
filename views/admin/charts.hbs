@@ -1,4 +1,3 @@
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -13,7 +12,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="adminassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,691 +36,726 @@
   ======================================================== -->
 </head>
 
-  <main id="main" class="main">
+<main id="main" class="main">
 
 
 
 
 
-{{!-- ---------------------------------------------------------------------BODY-------------------------------------------------------------------------------- --}}
+  {{!--
+  ---------------------------------------------------------------------BODY--------------------------------------------------------------------------------
+  --}}
 
 
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-      <div class="row">
+  <section class="section dashboard">
+    <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Sales <span>| Today</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-cart"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{todaySale}}</h6>
+                    <span class="text-success small pt-1 fw-bold">12%</span> <span
+                      class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
                 </div>
+              </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Sales <span>| Today</span></h5>
+            </div>
+          </div><!-- End Sales Card -->
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{todaySale}}</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+          <!-- Revenue Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
 
-                    </div>
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>₹{{getMonthlyAmount.[0].totalSaleAmount}}</h6>
+                    <span class="text-success small pt-1 fw-bold">8%</span> <span
+                      class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Revenue Card -->
+
+          <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Customers <span>| This Year</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-people"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{totalusers}}</h6>
+                    <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                      class="text-muted small pt-2 ps-1">decrease</span>
+
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Sales Card -->
+            </div>
 
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
+          </div><!-- End Customers Card -->
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+          <!-- Reports -->
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Revenue <span>| This Month</span></h5>
+          <div class="col-12">
+            <div class="card">
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>₹{{getMonthlyAmount.[0].totalSaleAmount}}</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+              <div class="filter">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                      aria-selected="true" onclick='dailyReport()'>Daily</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                      aria-selected="false" onclick="monthReport()">Monthly</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                      data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                      aria-selected="false" onclick="yearlyReport()">Yearly</button>
+                  </li>
+                </ul>
+                <div class="tab-content pt-2" id="myTabContent">
 
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{totalusers}}</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
-                  </div>
-
-                </div>
+                </div><!-- End Pills Tabs -->
               </div>
 
-            </div><!-- End Customers Card -->
-
-            <!-- Reports -->
-
-
-         <div class="col-12">
-                    <div class="card">
-
-                        <div class="filter">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick='dailyReport()'>Daily</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="monthReport()">Monthly</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="yearlyReport()">Yearly</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content pt-2" id="myTabContent">
-                                
-                            </div><!-- End Pills Tabs -->
-                        </div>
-
-                    <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+              <div class="card-body">
+                <h5 class="card-title">Reports <span>/Today</span></h5>
 
 
 
 
-                  <!-- Line Chart -->
-                  
-                    <canvas id="line-chart"></canvas>
-                 
-                    <script>
-                              var myChart;
-                              var myChart0;
-                              var myChart3
-                              var chart1
-                              var chart0
-                              var chart3
+                <!-- Line Chart -->
 
-                            window.onload = () => {
-                            dailyReport()
-                            dayReport()
-                            daily_Report()
-                            overAllReport()
-                            };
+                <canvas id="line-chart"></canvas>
 
+                <script>
+                  var myChart;
+                  var myChart0;
+                  var myChart3
+                  var chart1
+                  var chart0
+                  var chart3
 
-                              
-                             function dailyReport(){
-                                   
-                              chart1 = true;
+                  window.onload = () => {
+                    dailyReport()
+                    dayReport()
+                    daily_Report()
+                    overAllReport()
+                  };
 
 
-                            const data = {
-                                labels: [
-                                  {{#each dailySale}}
-                                  '{{_id}}',
-                                  {{/each}}
+
+                  function dailyReport() {
+
+                    chart1 = true;
+
+
+                    const data = {
+                      labels: [
+                        {{ #each dailySale }}
+                    '{{_id}}',
+                      {{
+                        /each}}
                                 ],
-                                datasets: [{
-                                  label: 'daily sales',
-                                  data: [{{#each dailySale}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
+                      datasets: [{
+                        label: 'daily sales',
+                        data: [{{ #each dailySale }}'{{totalAmount}}', {{/ each}
+                  }],
+                  backgroundColor: [
+                    'rgb(103 119 239)',
+                    'rgb(102 187 106)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)'
+                  ]
                                 }]
                               };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                } 
-                              }; 
-                              if(chart0){
-                                myChart0.destroy()
-                              }
-                              if(chart3){
-                                myChart3.destroy()
-                              }         
-                                        
-                            myChart = new Chart(document.getElementById('line-chart'), config)
 
-                                                  
-                            } 
+                  const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                      aspectRatio: 3,
+                      responsive: true
+                    }
+                  };
+                  if (chart0) {
+                    myChart0.destroy()
+                  }
+                  if (chart3) {
+                    myChart3.destroy()
+                  }
 
-                            
-
-
-
-
-                            function yearlyReport(){
-
-
-                              chart3 = true;
-
-
-                            const data = {
-                                labels: [
-                                  {{#each yearlySale}}'{{_id}}',{{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'Yearly Sales',
-                                  data: [{{#each yearlySale}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                }
-                              }; 
-                            if(chart0){
-                                myChart0.destroy()
-                              }
-                              if(chart1){
-                                myChart.destroy()
-                              }  
-                            myChart3 = new Chart(document.getElementById('line-chart'), config)
+                  myChart = new Chart(document.getElementById('line-chart'), config)
 
                                                   
                             }
 
 
 
-                             function monthReport(){
-                                   
-                              chart0 = true;
 
 
-                            const data = {
-                                labels: [
-                                  {{#each monthSales}}'{{_id}}',{{/each}}
+
+                  function yearlyReport() {
+
+
+                    chart3 = true;
+
+
+                    const data = {
+                      labels: [
+                        {{ #each yearlySale }}'{{_id}}', {{
+                          /each}}
                                 ],
-                                datasets: [{
-                                  label: 'monthly sales',
-                                  data: [{{#each monthSales}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
+                      datasets: [{
+                        label: 'Yearly Sales',
+                        data: [{{ #each yearlySale }}'{{totalAmount}}', {{/ each}
+                  }],
+                  backgroundColor: [
+                    'rgb(103 119 239)',
+                    'rgb(102 187 106)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)'
+                  ]
                                 }]
                               };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                } 
-                              }; 
-                              if(chart1){
-                                myChart.destroy()
-                              }
-                              if(chart3){
-                                myChart3.destroy()
-                              }         
-                                        
-                            myChart0 = new Chart(document.getElementById('line-chart'), config)
+
+                  const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                      aspectRatio: 3,
+                      responsive: true
+                    }
+                  };
+                  if (chart0) {
+                    myChart0.destroy()
+                  }
+                  if (chart1) {
+                    myChart.destroy()
+                  }
+                  myChart3 = new Chart(document.getElementById('line-chart'), config)
 
                                                   
-                            } 
+                            }
+
+
+
+                  function monthReport() {
+
+                    chart0 = true;
+
+
+                    const data = {
+                      labels: [
+                        {{ #each monthSales }}'{{_id}}', {{
+                          /each}}
+                                ],
+                      datasets: [{
+                        label: 'monthly sales',
+                        data: [{{ #each monthSales }}'{{totalAmount}}', {{/ each}
+                  }],
+                  backgroundColor: [
+                    'rgb(103 119 239)',
+                    'rgb(102 187 106)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)'
+                  ]
+                                }]
+                              };
+
+                  const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                      aspectRatio: 3,
+                      responsive: true
+                    }
+                  };
+                  if (chart1) {
+                    myChart.destroy()
+                  }
+                  if (chart3) {
+                    myChart3.destroy()
+                  }
+
+                  myChart0 = new Chart(document.getElementById('line-chart'), config)
+
+                                                  
+                            }
 
 
 
 
-                        </script>
-                  <!-- End Line Chart -->
-
-                </div>
+                </script>
+                <!-- End Line Chart -->
 
               </div>
-          
-          
-            </div><!-- End Reports -->
 
-            
+            </div>
 
 
+          </div><!-- End Reports -->
+
+
+
+
+
+        </div>
+      </div><!-- End Left side columns -->
+      {{!--
+      -------------------------------------------------------------------tttttttttttttt-------------------------------------------------------------------
+      --}}
+
+
+
+
+
+      <div class="col-6">
+        <div class="card">
+
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              {{!-- <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li> --}}
+
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">Brand Sales</h5>
+
+
+
+
+            <!-- Line Chart -->
+            <canvas id="line-chart2"></canvas>
+
+
+            <script>
+              var myChart4;
+
+              var chart4
+
+              function dayReport() {
+
+                chart4 = true;
+
+
+                const data = {
+                  labels: [
+                    {{ #each brandSales }}
+                '{{_id}}',
+                  {{
+                    /each}}
+                                ],
+                  datasets: [{
+                    label: 'sales',
+                    data: [{{ #each brandSales }}'{{total}}', {{/ each}
+              }],
+              backgroundColor: [
+                'rgb(103 119 239)',
+                'rgb(102 187 106)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)'
+              ]
+                                }]
+                              };
+
+              const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                  aspectRatio: 3,
+                  responsive: true
+                }
+              };
+
+
+              myChart4 = new Chart(document.getElementById('line-chart2'), config)
+
+                                                  
+                            }
+
+            </script>
+          </div>
+          <!-- End Line Chart -->
+
+        </div>
+      </div>
+      {{!--
+      -------------------------------------------------------------------tttttttttttttt-------------------------------------------------------------------
+      --}}
+      <div class="col-6">
+        <div class="card">
+
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">Payment Method Overall Sales</h5>
+
+
+
+
+            <!-- Line Chart -->
+            <canvas id="line-chart4"></canvas>
+
+
+            <script>
+              var myChart8;
+
+              var chart8
+
+              function overAllReport() {
+
+                chart8 = true;
+
+
+                const data = {
+                  labels: [
+                    {{ #each getAllPaymentTotalSale }}
+                '{{_id}}',
+                  {{
+                    /each}}
+                                ],
+                  datasets: [{
+                    label: 'sales',
+                    data: [{{ #each getAllPaymentTotalSale }}'{{totalAmount}}', {{/ each}
+              }],
+              backgroundColor: [
+                'rgb(103 119 239)',
+                'rgb(102 187 106)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)'
+              ]
+                                }]
+                              };
+
+              const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                  aspectRatio: 3,
+                  responsive: true
+                }
+              };
+
+
+              myChart8 = new Chart(document.getElementById('line-chart4'), config)
+
+                                                  
+                            }
+
+            </script>
+          </div>
+          <!-- End Line Chart -->
+
+        </div>
+      </div>
+
+      {{!--
+      -------------------------------------------------------------------tttttttttttttt-------------------------------------------------------------------
+      --}}
+      <div class="col-12">
+        <div class="card">
+
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter1</h6>
+              </li>
+
+              <li class="dropdown-item" onclick='daily_Report()'>Razorpay</li>
+              <li class="dropdown-item" onclick='monthly_Report()'>Paypal</li>
+              <li class="dropdown-item" onclick="yearly_Report()">COD</li>
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">Payment Method <span>/Daily Sales</span></h5>
+
+
+
+
+            <!-- Line Chart -->
+            <canvas id="line-chart3"></canvas>
+
+
+            <script>
+              var myChart5;
+              var myChart6;
+              var myChart7
+              var chart5
+              var chart6
+              var chart7
+
+
+
+              function daily_Report() {
+
+                chart5 = true;
+
+
+                const data = {
+                  labels: [
+                    {{ #each razorpay }}
+                '{{_id.day}}',
+                  {{
+                    /each}}
+                                ],
+                  datasets: [{
+                    label: 'Razorpay daily sales',
+                    data: [{{ #each razorpay }}'{{totalAmount}}', {{/ each}
+              }],
+              backgroundColor: [
+                'rgb(103 119 239)',
+                'rgb(102 187 106)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)'
+              ]
+                                }]
+                              };
+
+              const config = {
+                type: 'line',
+                data: data,
+                options: {
+                  aspectRatio: 3,
+                  responsive: true
+                }
+              };
+              if (chart6) {
+                myChart6.destroy()
+              }
+              if (chart7) {
+                myChart7.destroy()
+              }
+
+              myChart5 = new Chart(document.getElementById('line-chart3'), config)
+
+                                                  
+                            }
+
+
+
+
+
+              function monthly_Report() {
+
+                chart6 = true;
+
+
+                const data = {
+                  labels: [
+                    {{ #each paypal }}'{{_id.day}}', {{
+                      /each}}
+                                ],
+                  datasets: [{
+                    label: 'Paypal  Sales',
+                    data: [{{ #each paypal }}'{{totalAmount}}', {{/ each}
+              }],
+              backgroundColor: [
+                'rgb(103 119 239)',
+                'rgb(102 187 106)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)'
+              ]
+                                }]
+                              };
+
+              const config = {
+                type: 'line',
+                data: data,
+                options: {
+                  aspectRatio: 3,
+                  responsive: true
+                }
+              };
+              if (chart5) {
+                myChart5.destroy()
+              }
+              if (chart7) {
+                myChart7.destroy()
+              }
+
+              myChart6 = new Chart(document.getElementById('line-chart3'), config)
+
+                                                  
+                            }
+
+              function yearly_Report() {
+
+
+                chart7 = true;
+
+
+                const data = {
+                  labels: [
+                    {{ #each COD }}'{{_id.day}}', {{
+                      /each}}
+                                ],
+                  datasets: [{
+                    label: 'COD daily Sales',
+                    data: [{{ #each COD }}'{{totalAmount}}', {{/ each}
+              }],
+              backgroundColor: [
+                'rgb(103 119 239)',
+                'rgb(102 187 106)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)'
+              ]
+                                }]
+                              };
+
+              const config = {
+                type: 'line',
+                data: data,
+                options: {
+                  aspectRatio: 3,
+                  responsive: true
+                }
+              };
+              if (chart6) {
+                myChart6.destroy()
+              }
+              if (chart5) {
+                myChart5.destroy()
+              }
+              myChart7 = new Chart(document.getElementById('line-chart3'), config)
+
+                                                  
+                            }
+            </script>
+            <!-- End Line Chart -->
 
           </div>
-        </div><!-- End Left side columns -->
-         {{!-- -------------------------------------------------------------------tttttttttttttt------------------------------------------------------------------- --}}
-
-         
-         
-
-
-         <div class="col-6">
-                    <div class="card">
-
-                        <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            {{!-- <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                            </li> --}}
-                      
-                        </ul>
-                        </div>
-
-                    <div class="card-body">
-                  <h5 class="card-title">Brand Sales</h5>
 
 
 
 
-                  <!-- Line Chart -->
-                  <canvas id="line-chart2"></canvas>
-
-                 
-                    <script>
-                              var myChart4;
-                       
-                              var chart4
-                              
-                             function dayReport(){
-                                   
-                              chart4 = true;
 
 
-                            const data = {
-                                labels: [
-                                  {{#each brandSales}}
-                                  '{{_id}}',
-                                  {{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'sales',
-                                  data: [{{#each brandSales}}'{{total}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'doughnut',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                } 
-                              }; 
-                               
-                                        
-                            myChart4 = new Chart(document.getElementById('line-chart2'), config)
-
-                                                  
-                            } 
-
-                        </script>
-                    </div>
-                  <!-- End Line Chart -->
-
-                    </div>
-                    </div>
- {{!-- -------------------------------------------------------------------tttttttttttttt------------------------------------------------------------------- --}}
-     <div class="col-6">
-                    <div class="card">
-
-                        <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                            </li>
-                      
-                        </ul>
-                        </div>
-
-                    <div class="card-body">
-                  <h5 class="card-title">Payment Method Overall Sales</h5>
-
-
-
-
-                  <!-- Line Chart -->
-                  <canvas id="line-chart4"></canvas>
-
-                 
-                    <script>
-                              var myChart8;
-                       
-                              var chart8
-                              
-                             function overAllReport(){
-                                   
-                              chart8 = true;
-
-
-                            const data = {
-                                labels: [
-                                  {{#each getAllPaymentTotalSale}}
-                                  '{{_id}}',
-                                  {{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'sales',
-                                  data: [{{#each getAllPaymentTotalSale}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'pie',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                } 
-                              }; 
-                               
-                                        
-                            myChart8 = new Chart(document.getElementById('line-chart4'), config)
-
-                                                  
-                            } 
-
-                        </script>
-                    </div>
-                  <!-- End Line Chart -->
-
-                    </div>
-                    </div>
-         
-{{!-- -------------------------------------------------------------------tttttttttttttt------------------------------------------------------------------- --}}
-                 <div class="col-12"> 
-                    <div class="card">
-
-                        <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                            <h6>Filter1</h6>
-                            </li>
-
-                            <li class="dropdown-item" onclick='daily_Report()'>Razorpay</li>
-                            <li class="dropdown-item" onclick='monthly_Report()'>Paypal</li>
-                            <li class="dropdown-item"  onclick="yearly_Report()">COD</li>
-                        </ul>
-                        </div>
-
-                    <div class="card-body">
-                  <h5 class="card-title">Payment Method <span>/Daily Sales</span></h5>
-
-
-
-
-                  <!-- Line Chart -->
-                  <canvas id="line-chart3"></canvas>
-
-                 
-                    <script>
-                              var myChart5;
-                              var myChart6;
-                              var myChart7
-                              var chart5
-                              var chart6
-                              var chart7
-
-
-                              
-                             function daily_Report(){
-                                   
-                              chart5 = true;
-
-
-                            const data = {
-                                labels: [
-                                  {{#each razorpay}}
-                                  '{{_id.day}}',
-                                  {{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'Razorpay daily sales',
-                                  data: [{{#each razorpay}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                } 
-                              }; 
-                              if(chart6){
-                                myChart6.destroy()
-                              }
-                              if(chart7){
-                                myChart7.destroy()
-                              }         
-                                        
-                            myChart5 = new Chart(document.getElementById('line-chart3'), config)
-
-                                                  
-                            } 
-
-                            
-
-
-
-                            function monthly_Report(){
-                             
-                              chart6 = true;
-
-
-                            const data = {
-                                labels: [
-                                  {{#each paypal}}'{{_id.day}}',{{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'Paypal  Sales',
-                                  data: [{{#each paypal}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                }
-                              }; 
-                              if(chart5){
-                                myChart5.destroy()
-                              }
-                              if(chart7){
-                                myChart7.destroy()
-                              }         
-                                        
-                            myChart6 = new Chart(document.getElementById('line-chart3'), config)
-
-                                                  
-                            } 
-
-                            function yearly_Report(){
-
-
-                              chart7 = true;
-
-
-                            const data = {
-                                labels: [
-                                  {{#each COD}}'{{_id.day}}',{{/each}}
-                                ],
-                                datasets: [{
-                                  label: 'COD daily Sales',
-                                  data: [{{#each COD}}'{{totalAmount}}',{{/each}}],
-                                  backgroundColor: [
-                                    'rgb(103 119 239)',
-                                    'rgb(102 187 106)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 99, 132)'
-                                  ]
-                                }]
-                              };
-                              
-                              const config = {
-                                type: 'line',
-                                data: data,
-                                options: {
-                                  aspectRatio:3,
-                                  responsive:true
-                                }
-                              }; 
-                            if(chart6){
-                                myChart6.destroy()
-                              }
-                              if(chart5){
-                                myChart5.destroy()
-                              }  
-                            myChart7 = new Chart(document.getElementById('line-chart3'), config)
-
-                                                  
-                            }
-                        </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-    
-
-            
-
-     
         </div><!-- End Left side columns -->
 
 
 
-{{!-- ---------------------------------------------------------------------BODY-------------------------------------------------------------------------------- --}}
+        {{!--
+        ---------------------------------------------------------------------BODY--------------------------------------------------------------------------------
+        --}}
 
 
 
-  </main><!-- End #main -->
+</main><!-- End #main -->
 
-  
-  <!-- Vendor JS Files -->
-  <script src="adminassets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="adminassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="adminassets/vendor/chart.js/chart.min.js"></script>
-  <script src="adminassets/vendor/echarts/echarts.min.js"></script>
-  <script src="adminassets/vendor/quill/quill.min.js"></script>
-  <script src="adminassets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="adminassets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="adminassets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="adminassets/js/main.js"></script>
+<!-- Vendor JS Files -->
+<script src="adminassets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="adminassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="adminassets/vendor/chart.js/chart.min.js"></script>
+<script src="adminassets/vendor/echarts/echarts.min.js"></script>
+<script src="adminassets/vendor/quill/quill.min.js"></script>
+<script src="adminassets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="adminassets/vendor/tinymce/tinymce.min.js"></script>
+<script src="adminassets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="adminassets/js/main.js"></script>
 
 </body>
 

@@ -1,128 +1,136 @@
 <script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
+	addEventListener("load", function () {
+		setTimeout(hideURLbar, 0);
+	}, false);
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
+	function hideURLbar() {
+		window.scrollTo(0, 1);
+	}
+</script>
 
 <link href="/assets/css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- Bootstrap css -->
-	<link href="/assets/css/style1.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- Main css -->
-	<link rel="stylesheet" href="/assets/css/fontawesome-all1.css">
-	<!-- Font-Awesome-Icons-CSS -->
-	<link href="/assets/css/popuo-box1.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- pop-up-box -->
-	<link href="/assets/css/menu1.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- menu style -->
+<!-- Bootstrap css -->
+<link href="/assets/css/style1.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Main css -->
+<link rel="stylesheet" href="/assets/css/fontawesome-all1.css">
+<!-- Font-Awesome-Icons-CSS -->
+<link href="/assets/css/popuo-box1.css" rel="stylesheet" type="text/css" media="all" />
+<!-- pop-up-box -->
+<link href="/assets/css/menu1.css" rel="stylesheet" type="text/css" media="all" />
+<!-- menu style -->
 
 
 <div class="banner-bootom-w3-agileits py-5">
-		<div class="container py-xl-4 py-lg-2">
-			<div class="row"> 
-				<div class="col-lg-5 col-md-8 single-right-left ">
-					<div class="grid images_3_of_2">
-						<div class="flexslider">
-							<ul class="slides">
-								<li data-thumb="/images/product-images/{{product.img.[0]}}">
-									<div class="thumb-image">
-										<img src="/images/product-images/{{product.img.[0]}}" id="zoom_01" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li>
-								<li data-thumb="/images/product-images/{{product.img.[1]}}">
-									<div class="thumb-image">
-										<img src="/images/product-images/{{product.img.[1]}}" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li>
-								<li data-thumb="/images/product-images/{{product.img.[2]}}">
-									<div class="thumb-image">
-										<img src="/images/product-images/{{product.img.[2]}}" data-imagezoom="true" class="img-fluid" alt="" class="img-thumbnail"> </div>
-								</li>
-							</ul>
-							
-							<div class="clearfix"></div>
-						</div>
-					</div>
-				</div>
+	<div class="container py-xl-4 py-lg-2">
+		<div class="row">
+			<div class="col-lg-5 col-md-8 single-right-left ">
+				<div class="grid images_3_of_2">
+					<div class="flexslider">
+						<ul class="slides">
+							<li data-thumb="/images/product-images/{{product.img.[0]}}">
+								<div class="thumb-image">
+									<img src="/images/product-images/{{product.img.[0]}}" id="zoom_01"
+										data-imagezoom="true" class="img-fluid" alt="">
+								</div>
+							</li>
+							<li data-thumb="/images/product-images/{{product.img.[1]}}">
+								<div class="thumb-image">
+									<img src="/images/product-images/{{product.img.[1]}}" data-imagezoom="true"
+										class="img-fluid" alt="">
+								</div>
+							</li>
+							<li data-thumb="/images/product-images/{{product.img.[2]}}">
+								<div class="thumb-image">
+									<img src="/images/product-images/{{product.img.[2]}}" data-imagezoom="true"
+										class="img-fluid" alt="" class="img-thumbnail">
+								</div>
+							</li>
+						</ul>
 
-				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
-					<h3 class="mb-3">{{product.Name}}</h3>
-					<p class="mb-3">
-						 {{#if product.higherOfferPercentage}}
-                            <span>Offer Price.{{product.Price}}</span><br>
-                            <span>Original Price.<strike>{{product.originalPrice}}</strike></span>
-                            {{else}}
-                             <span>Rs.{{product.Price}}</span>
-                            {{/if}}
-						<del class="mx-2 font-weight-light"></del>
-						<label>Free delivery</label>
-					</p>
-					<div class="single-infoagile">
-						<ul>
-							<li class="mb-3">
-								Cash on Delivery Eligible.
-							</li>
-							<li class="mb-3">
-								Shipping Speed to Delivery.
-							</li>
-							<li class="mb-3">
-								{{product.Description}}
-							</li>
-							<li class="mb-3">
-								{{product.Category}}
-							</li>
-						</ul>
-					</div>
-					<div class="product-single-w3l">
-						<p class="my-3">
-							<i class="far fa-hand-point-right mr-2"></i>
-							<label>1 Year</label>Manufacturer Warranty</p>
-						<ul>
-							<li class="mb-1">
-								Trusted Brand
-							</li>
-							<li class="mb-1">
-								Sophisticated Design
-							</li>
-							<li class="mb-1">
-								Hand Made Machine
-							</li>
-						</ul>
-						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
-						</p>
-					</div>
-					<div class="occasion-cart">
-						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							
-									<button onclick="addToCart('{{product._id}}')" class="btn btn-danger">Add to cart</button>
-								{{!-- </fieldset> --}}
-							{{!-- </form> --}}
-						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
+
+			<div class="col-lg-7 single-right-left simpleCart_shelfItem">
+				<h3 class="mb-3">{{product.Name}}</h3>
+				<p class="mb-3">
+					{{#if product.higherOfferPercentage}}
+					<span>Offer Price.{{product.Price}}</span><br>
+					<span>Original Price.<strike>{{product.originalPrice}}</strike></span>
+					{{else}}
+					<span>Rs.{{product.Price}}</span>
+					{{/if}}
+					<del class="mx-2 font-weight-light"></del>
+					<label>Free delivery</label>
+				</p>
+				<div class="single-infoagile">
+					<ul>
+						<li class="mb-3">
+							Cash on Delivery Eligible.
+						</li>
+						<li class="mb-3">
+							Shipping Speed to Delivery.
+						</li>
+						<li class="mb-3">
+							{{product.Description}}
+						</li>
+						<li class="mb-3">
+							{{product.Category}}
+						</li>
+					</ul>
+				</div>
+				<div class="product-single-w3l">
+					<p class="my-3">
+						<i class="far fa-hand-point-right mr-2"></i>
+						<label>1 Year</label>Manufacturer Warranty
+					</p>
+					<ul>
+						<li class="mb-1">
+							Trusted Brand
+						</li>
+						<li class="mb-1">
+							Sophisticated Design
+						</li>
+						<li class="mb-1">
+							Hand Made Machine
+						</li>
+					</ul>
+					<p class="my-sm-4 my-3">
+						<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+					</p>
+				</div>
+				<div class="occasion-cart">
+					<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+
+						<button onclick="addToCart('{{product._id}}')" class="btn btn-danger">Add to cart</button>
+						{{!-- </fieldset> --}}
+						{{!-- </form> --}}
+					</div>
+				</div>
 			</div>
-			</div>
-				{{!-- {{/each}} --}}
 		</div>
 	</div>
+</div>
+{{!-- {{/each}} --}}
+</div>
+</div>
 <script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+<script type="text/javascript"
+	src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
 </script>
-	<script>
+<script>
 
 
 		$("#zoom_01").ezPlus();
-	</script> 
+</script>
 
-	<!-- jquery -->
-	<script src="/assets/js/jquery-2.2.31.min.js"></script>
+<!-- jquery -->
+<script src="/assets/js/jquery-2.2.31.min.js"></script>
 
-	<!-- nav smooth scroll -->
-	<script>
+<!-- nav smooth scroll -->
+<script>
 		$(document).ready(function () {
 			$(".dropdown").hover(
 				function () {
@@ -135,11 +143,11 @@
 				}
 			);
 		});
-	</script>
+</script>
 
-	<!-- popup modal (for location)-->
-	<script src="/assets/js/jquery.magnific-popup1.js"></script>
-	<script>
+<!-- popup modal (for location)-->
+<script src="/assets/js/jquery.magnific-popup1.js"></script>
+<script>
 		$(document).ready(function () {
 			$('.popup-with-zoom-anim').magnificPopup({
 				type: 'inline',
@@ -154,56 +162,56 @@
 			});
 
 		});
-	</script>
-	<script src="/assets/js/minicart1.js"></script>
+</script>
+<script src="/assets/js/minicart1.js"></script>
 
-	<script>
+<script>
 		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
 
 		paypals.minicarts.cart.on('checkout', function (evt) {
 			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
+		len = items.length,
+		total = 0,
+		i;
 
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
+		// Count the number of each item in the cart
+		for (i = 0; i < len; i++) {
+			total += items[i].get('quantity');
 			}
 
-			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-				evt.preventDefault();
+		if (total < 3) {
+			alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+		evt.preventDefault();
 			}
 		});
-	</script>
-	<!-- //cart-js -->
+</script>
+<!-- //cart-js -->
 
-	<!-- password-script -->
-	<script>
+<!-- password-script -->
+<script>
 		window.onload = function () {
 			document.getElementById("password1").onchange = validatePassword;
-			document.getElementById("password2").onchange = validatePassword;
+		document.getElementById("password2").onchange = validatePassword;
 		}
 
 		function validatePassword() {
 			var pass2 = document.getElementById("password2").value;
-			var pass1 = document.getElementById("password1").value;
-			if (pass1 != pass2)
-				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-			else
-				document.getElementById("password2").setCustomValidity('');
+		var pass1 = document.getElementById("password1").value;
+		if (pass1 != pass2)
+		document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+		else
+		document.getElementById("password2").setCustomValidity('');
 			//empty string means no validation error
 		}
-	</script>
-	<!-- //password-script -->
-	<script src="/assets/js/imagezoom1.js"></script>
+</script>
+<!-- //password-script -->
+<script src="/assets/js/imagezoom1.js"></script>
 
-	<!-- flexslider -->
-	<link rel="stylesheet" href="/assets/css/flexslider1.css" type="text/css" media="screen" />
+<!-- flexslider -->
+<link rel="stylesheet" href="/assets/css/flexslider1.css" type="text/css" media="screen" />
 
-	<script src="/assets/js/jquery.flexslider1.js"></script>
-	<script>
+<script src="/assets/js/jquery.flexslider1.js"></script>
+<script>
 		// Can also be used with $(document).ready()
 		$(window).load(function () {
 			$('.flexslider').flexslider({
@@ -211,12 +219,12 @@
 				controlNav: "thumbnails"
 			});
 		});
-	</script>
-	<!-- //FlexSlider-->
-	<script src="/assets/js/SmoothScroll1.min.js"></script>
-	<script src="/assets/js/move-top1.js"></script>
-	<script src="/assets/js/easing1.js"></script>
-	<script>
+</script>
+<!-- //FlexSlider-->
+<script src="/assets/js/SmoothScroll1.min.js"></script>
+<script src="/assets/js/move-top1.js"></script>
+<script src="/assets/js/easing1.js"></script>
+<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
 				event.preventDefault();
@@ -226,7 +234,7 @@
 				}, 1000);
 			});
 		});
-	</script>
-	<!-- //end-smooth-scrolling -->
+</script>
+<!-- //end-smooth-scrolling -->
 
-	<script src="/assets/js/bootstrap1.js"></script>
+<script src="/assets/js/bootstrap1.js"></script>

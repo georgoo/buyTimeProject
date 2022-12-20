@@ -36,21 +36,22 @@
                         </div>
                         <div class="col-sm-6 ">
                             <h5 class="mb-3">To:</h5>
-                            <h3 class="text-dark mb-1"> {{order.deliveryDetails.firstName}} {{order.deliveryDetails.lastName}}</h3>
+                            <h3 class="text-dark mb-1"> {{order.deliveryDetails.firstName}}
+                                {{order.deliveryDetails.lastName}}</h3>
                             <div>{{order.deliveryDetails.address}} </div>
                             <div>{{order.deliveryDetails.country}} {{order.deliveryDetails.city}} </div>
                             <div>{{order.deliveryDetails.state}} {{order.deliveryDetails.pincode}} </div>
 
                             <div>Email:{{order.deliveryDetails.email}} </div>
-                        <div>Phone: {{order.deliveryDetails.mobile}}</div>
+                            <div>Phone: {{order.deliveryDetails.mobile}}</div>
                         </div>
                     </div>
 
 
                     <strong class="text-dark">
-                       <h1> Total </h1>
+                        <h1> Total </h1>
                     </strong>
-                    
+
                     {{#if order.totalAmount}}
                     <h1><strong class="text-dark">Rs. {{order.totalAmount}}</strong></h1>
                     {{else}}
@@ -112,30 +113,30 @@
 
     </div>
 
-<script>
-     function invoicePDF() {
+    <script>
+        function invoicePDF() {
             var doc = new jsPDF();
 
             // We'll make our own renderer to skip this editor
             var specialElementHandlers = {
-                '#getPDF': function (element,renderer) {
+                '#getPDF': function (element, renderer) {
                     return true;
                 },
-                '.controls': function (element,renderer) {
+                '.controls': function (element, renderer) {
                     return true;
                 }
             };
 
             // All units are in the set measurement for the document
             // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
-            doc.fromHTML($('.elem').get(0),15,15,{
+            doc.fromHTML($('.elem').get(0), 15, 15, {
                 'width': 170,
                 'elementHandlers': specialElementHandlers
             });
 
             doc.save('Generated.pdf');
         }
-</script>
+    </script>
 </body>
 
 

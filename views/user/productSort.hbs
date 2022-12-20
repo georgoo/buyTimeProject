@@ -1,33 +1,33 @@
 <div class="popular-items ">
     <main class="d-flex flex-nowrap">
-        
+
         <div class="d-flex flex-column flex-shrink-0 p-3 ml-4 " style="width: 280px;">
 
             <hr>
             <form action="/getCategorisedResults" method="post">
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="#home"></use>
-                        </svg>
-                        Categories
-                    </a>
-                </li>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" aria-current="page">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#home"></use>
+                            </svg>
+                            Categories
+                        </a>
+                    </li>
 
-                <br>
-                {{#each categories}}
-                <div >
+                    <br>
+                    {{#each categories}}
+                    <div>
 
-                    <label for="" class="radio-inline">
-                        {{this.name}} <input type="checkbox" name="category" value="{{this._id}}" />
-                    </label>
+                        <label for="" class="radio-inline">
+                            {{this.name}} <input type="checkbox" name="category" value="{{this._id}}" />
+                        </label>
 
-                </div>
-                {{/each}}
-                <button class="btn btn-primary float-right" type="submit">Submit</button>
+                    </div>
+                    {{/each}}
+                    <button class="btn btn-primary float-right" type="submit">Submit</button>
 
-            </ul>
+                </ul>
             </form>
             <hr>
 

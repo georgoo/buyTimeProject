@@ -1,83 +1,84 @@
 <div class="main" id="main">
-            
-                <div class="row">
-                 {{#each orderedProducts}}
-                <div class="col-md-3 p-3">
-                    <div class="card" style="width: 15rem;height: 24rem;">
-                           <img src="/images/product-images/{{product.img.[0]}}"
-                            alt="card-img-cap" class="card-img-top"
-                             style="height:12rem ;">
-                          <div class="card-body">
-                            <h5 class="card-title">{{this.product.Name}}</h5>
-                            <h5 class="card-text">Rs. {{this.product.Price}}</h5>
-                            <h5 class="card-text">Quantity : {{this.quantity}}</h5>
-                            <h5 class="card-text">{{this.product.Description}}</h5>
-                            <h5 class="card-text" value="{{usersession.orderId}}" >{{this.orderId}}</h5>
-                            {{#if this.orderCancelled}}
-                            {{else}}
-                            {{!-- <a href="/returnProduct/{{this.product._id}}"><button class="btn-success" >Return</button></a> --}}
-                            {{/if}}
-                          </div>
-                    </div>
 
-                </div>
-                {{/each}}
-                </div>
-                {{!-- <div class="card-header">Header</div> --}}
-                <div class="card-body text-center mt-3">
-                    <h5 class="card-title">Price Details</h5>
-                    <div class="m-3">
-                    <span class="m-4">Total Price: </span><span class="mb-3 ">Rs. {{orderDetails.originalPrice}}</span><br>
-                    </div>
-                    <div class="m-3">
-                    {{#if orderDetails.totalPriceAfterOffer}}
-                    <span class="m-2">Discount: </span><span class="mb-3">-Rs. {{orderDetails.totalDiscount}}</span><br><br>
-                    <span class="m-2">Coupon- Offer: </span><span class="mb-3">-Rs. {{orderDetails.discountedPrice}}</span>
+    <div class="row">
+        {{#each orderedProducts}}
+        <div class="col-md-3 p-3">
+            <div class="card" style="width: 15rem;height: 24rem;">
+                <img src="/images/product-images/{{product.img.[0]}}" alt="card-img-cap" class="card-img-top"
+                    style="height:12rem ;">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.product.Name}}</h5>
+                    <h5 class="card-text">Rs. {{this.product.Price}}</h5>
+                    <h5 class="card-text">Quantity : {{this.quantity}}</h5>
+                    <h5 class="card-text">{{this.product.Description}}</h5>
+                    <h5 class="card-text" value="{{usersession.orderId}}">{{this.orderId}}</h5>
+                    {{#if this.orderCancelled}}
                     {{else}}
-                    {{!-- <span class="m-2">Discount: </span><span class="mb-3">-Rs. {{orderDetails.totalDiscount}}</span> --}}
+                    {{!-- <a href="/returnProduct/{{this.product._id}}"><button class="btn-success">Return</button></a>
+                    --}}
                     {{/if}}
-                    </div>
-                    <hr>
-                    <div>
-                    
-                    {{#if orderDetails.totalPriceAfterOffer}}
-                    <span class="m-4">Total amount paid:</span><span class="mb-3">Rs. {{orderDetails.totalPriceAfterOffer}}</span>
-                    {{else}}
-                    <span class="m-4">Total amount paid:</span><span class="mb-3">Rs. {{orderDetails.totalAmount}}</span>
-                    {{/if}}
-
-                    <hr>
-                    <div class="m-4 text-center">
-                       <h3 class="card-title">Order Details</h3> Order : {{orderDetails.status}}
-                    </div>
-                    <hr>
-                    </div>
                 </div>
-                <div class="m-4 text-center">
-                   <h3 class="card-title">User Details</h3>
-                    <div class="row ml-3">
-                        {{!-- <div class="col-2"></div> --}}
-                        <div class="col-4 text-end">
-                            <div>Full Name: </div>
-                            <div>Address:</div>
-                            {{!-- <div>City:</div> --}}
-                            <div>State: </div>
-                            <div>Pin Code: </div>
-                            <div>email: </div>
+            </div>
 
-                        </div>
-                        <div class="col-8 text-left">
-                            <div>{{orderDetails.deliveryDetails.firstName}} {{orderDetails.deliveryDetails.lastName}}</div>
-                            <div>{{orderDetails.deliveryDetails.address}}</div>
-                            {{!-- <div>{{userAddress.city}}</div> --}}
-                            <div>{{orderDetails.deliveryDetails.state}}</div>
-                            <div>{{orderDetails.deliveryDetails.pincode}}</div>
-                            <div>{{orderDetails.deliveryDetails.email}}</div>
-
-                        </div>
-
-                    </div>
-                </div>
-            
+        </div>
+        {{/each}}
     </div>
+    {{!-- <div class="card-header">Header</div> --}}
+    <div class="card-body text-center mt-3">
+        <h5 class="card-title">Price Details</h5>
+        <div class="m-3">
+            <span class="m-4">Total Price: </span><span class="mb-3 ">Rs. {{orderDetails.originalPrice}}</span><br>
+        </div>
+        <div class="m-3">
+            {{#if orderDetails.totalPriceAfterOffer}}
+            <span class="m-2">Discount: </span><span class="mb-3">-Rs. {{orderDetails.totalDiscount}}</span><br><br>
+            <span class="m-2">Coupon- Offer: </span><span class="mb-3">-Rs. {{orderDetails.discountedPrice}}</span>
+            {{else}}
+            {{!-- <span class="m-2">Discount: </span><span class="mb-3">-Rs. {{orderDetails.totalDiscount}}</span> --}}
+            {{/if}}
+        </div>
+        <hr>
+        <div>
+
+            {{#if orderDetails.totalPriceAfterOffer}}
+            <span class="m-4">Total amount paid:</span><span class="mb-3">Rs.
+                {{orderDetails.totalPriceAfterOffer}}</span>
+            {{else}}
+            <span class="m-4">Total amount paid:</span><span class="mb-3">Rs. {{orderDetails.totalAmount}}</span>
+            {{/if}}
+
+            <hr>
+            <div class="m-4 text-center">
+                <h3 class="card-title">Order Details</h3> Order : {{orderDetails.status}}
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="m-4 text-center">
+        <h3 class="card-title">User Details</h3>
+        <div class="row ml-3">
+            {{!-- <div class="col-2"></div> --}}
+            <div class="col-4 text-end">
+                <div>Full Name: </div>
+                <div>Address:</div>
+                {{!-- <div>City:</div> --}}
+                <div>State: </div>
+                <div>Pin Code: </div>
+                <div>email: </div>
+
+            </div>
+            <div class="col-8 text-left">
+                <div>{{orderDetails.deliveryDetails.firstName}} {{orderDetails.deliveryDetails.lastName}}</div>
+                <div>{{orderDetails.deliveryDetails.address}}</div>
+                {{!-- <div>{{userAddress.city}}</div> --}}
+                <div>{{orderDetails.deliveryDetails.state}}</div>
+                <div>{{orderDetails.deliveryDetails.pincode}}</div>
+                <div>{{orderDetails.deliveryDetails.email}}</div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
 </div>

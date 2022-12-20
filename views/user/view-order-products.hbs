@@ -1,31 +1,31 @@
 <section>
-        <div class="container mt-5">
-            <h1>Product Details</h1>
-            <div class="row">
-                {{#each products}}
-                <div class="col-md-3 p-3">
-                    <div class="card" style="width: 15rem;height: 24rem;">
-                           <img src="/images/product-images/{{product.img.[0]}}"
-                            alt="card-img-cap" class="card-img-top"
-                             style="height:12rem ;">
-                          <div class="card-body">
-                            <h5 class="card-title">{{this.product.Name}}</h5>
-                            <h5 class="card-text">Rs. {{this.product.Price}}</h5>
-                            <h5 class="card-text">Quantity : {{this.quantity}}</h5>
-                            <h5 class="card-text">{{this.product.Description}}</h5>
-                            {{!-- <h5 class="card-text" value="{{../orderId}}" >{{../orderId}}</h5> --}}
-                            {{#if this.orderCancelled}}
-                            {{else}}
-                            {{!-- <a href="/returnProduct/{{this.product._id}}"><button class="btn-success" >Return</button></a> --}}
-                            {{/if}}
-                          </div>
+    <div class="container mt-5">
+        <h1>Product Details</h1>
+        <div class="row">
+            {{#each products}}
+            <div class="col-md-3 p-3">
+                <div class="card" style="width: 15rem;height: 24rem;">
+                    <img src="/images/product-images/{{product.img.[0]}}" alt="card-img-cap" class="card-img-top"
+                        style="height:12rem ;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.product.Name}}</h5>
+                        <h5 class="card-text">Rs. {{this.product.Price}}</h5>
+                        <h5 class="card-text">Quantity : {{this.quantity}}</h5>
+                        <h5 class="card-text">{{this.product.Description}}</h5>
+                        {{!-- <h5 class="card-text" value="{{../orderId}}">{{../orderId}}</h5> --}}
+                        {{#if this.orderCancelled}}
+                        {{else}}
+                        {{!-- <a href="/returnProduct/{{this.product._id}}"><button
+                                class="btn-success">Return</button></a> --}}
+                        {{/if}}
                     </div>
-
                 </div>
-                {{/each}}
+
             </div>
-
-            <a href="/view-invoice/{{orderId}}"><button class="btn-warning">Invoice</button></a>
-
+            {{/each}}
         </div>
+
+        <a href="/view-invoice/{{orderId}}"><button class="btn-warning">Invoice</button></a>
+
+    </div>
 </section>

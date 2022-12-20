@@ -1,45 +1,44 @@
-
 <div class="popular-items ">
     <h2 style="text-align: center;">Categories</h2>
-   <div class="mb-3 mt-2" style="text-align: center; ">
-    {{#each categoryName}}
-    
+    <div class="mb-3 mt-2" style="text-align: center; ">
+        {{#each categoryName}}
 
-   <h4 style="display: inline; " >{{this.name}} &nbsp;</h4> 
-    
 
-    
-    {{/each}}
-   </div> 
-<div class="container">
- <div class="row">
-                {{#each categoryProducts}}
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-popular-items mb-50 text-center">
-                        <div class="popular-img">
-                            <a href="/productDetails/{{this._id}}"><img src="/images/product-images/{{this.img.[0]}}"
-                                    style="height: 300px;width:100%;" alt=""></a>
-                            <div class="img-cap">
+        <h4 style="display: inline; ">{{this.name}} &nbsp;</h4>
 
-                                <button onclick="addToCart('{{this._id}}')" class="btn btn-danger">Add to cart</button>
-                            </div>
-                            <div class="favorit-items">
-                                <span onclick="addToWishList('{{this._id}}')" class="flaticon-heart"></span>
-                            </div>
+
+
+        {{/each}}
+    </div>
+    <div class="container">
+        <div class="row">
+            {{#each categoryProducts}}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <div class="single-popular-items mb-50 text-center">
+                    <div class="popular-img">
+                        <a href="/productDetails/{{this._id}}"><img src="/images/product-images/{{this.img.[0]}}"
+                                style="height: 300px;width:100%;" alt=""></a>
+                        <div class="img-cap">
+
+                            <button onclick="addToCart('{{this._id}}')" class="btn btn-danger">Add to cart</button>
                         </div>
-                        <div class="popular-caption">
-                            <h3><a href="/productDetails/{{this._id}}">{{this.Name}}</a></h3>
-                            <h5>{{this.category }}</h5>
-                            {{#if this.higherOfferPercentage}}
-                            <span>Offer Price.{{this.Price}}</span>
-                            <span>Original Price Rs.<strike>{{this.originalPrice}}</strike></span>
-                            {{else}}
-                            <span>Rs.{{this.Price}}</span>
-                            {{/if}}
+                        <div class="favorit-items">
+                            <span onclick="addToWishList('{{this._id}}')" class="flaticon-heart"></span>
                         </div>
                     </div>
+                    <div class="popular-caption">
+                        <h3><a href="/productDetails/{{this._id}}">{{this.Name}}</a></h3>
+                        <h5>{{this.category }}</h5>
+                        {{#if this.higherOfferPercentage}}
+                        <span>Offer Price.{{this.Price}}</span>
+                        <span>Original Price Rs.<strike>{{this.originalPrice}}</strike></span>
+                        {{else}}
+                        <span>Rs.{{this.Price}}</span>
+                        {{/if}}
+                    </div>
                 </div>
-                {{/each}}
             </div>
-            </div>
-            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -6,40 +6,44 @@
 					<div class="card-body">
 						<h4 class="checkout-subtitle text-danger">Create a new account</h4>
 						<p class="text title-tag-line">Create your new account.</p>
-						<form action="/signup" method="post" onsubmit="validateForm()" class="register-form outer-top-xs" role="form">
+						<form action="/signup" method="post" onsubmit="validateForm()"
+							class="register-form outer-top-xs" role="form">
 							<div class="form-group">
 								<label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
 								<input type="text" name="name" class="form-control unicase-form-control text-input"
 									id="name" onkeyup="validatename()">
-									<span id="errorName"></span>
+								<span id="errorName"></span>
 							</div>
-									
+
 							<div class="form-group">
 								<label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
 								<input type="email" name="remail" class="form-control unicase-form-control text-input"
 									id="email" onfocus="validatename()" onkeyup="validateEmail()">
-									<span id="errorEmail"></span><br>
-										{{#if emailMessage}}<span class="text-danger">{{emailMessage}}</span>{{/if}}
+								<span id="errorEmail"></span><br>
+								{{#if emailMessage}}<span class="text-danger">{{emailMessage}}</span>{{/if}}
 							</div>
 							<div class="form-group">
 								<label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
 								<input type="tel" name="phone" class="form-control unicase-form-control text-input"
 									id="phoneNumber" onfocus="validateEmail()" onkeyup="validatePhoneNumber()">
-									<span id="errorPhoneNumber"></span>{{#if phoneMessage}}<span class="text-danger">{{phoneMessage}}</span>{{/if}}
+								<span id="errorPhoneNumber"></span>{{#if phoneMessage}}<span
+									class="text-danger">{{phoneMessage}}</span>{{/if}}
 							</div>
 							<div class="form-group">
 								<label class="info-title" for="password">Password <span>*</span></label>
-								<input type="text" 
-									class="form-control unicase-form-control text-input" id="password1" onfocus="validatePhoneNumber()" onkeyup="validatePassword1()"  >
-									<span id="errorPassword1"></span>
+								<input type="text" class="form-control unicase-form-control text-input" id="password1"
+									onfocus="validatePhoneNumber()" onkeyup="validatePassword1()">
+								<span id="errorPassword1"></span>
 							</div>
 							<div class="form-group">
 								<label class="info-title" for="password">Confirm Password <span>*</span></label>
 								<input type="password" name="rpassword"
-									class="form-control unicase-form-control text-input" id="password2" onfocus="validatePassword1()" onkeyup="validatePassword2()" >
-									<span id="errorPassword2"></span>
+									class="form-control unicase-form-control text-input" id="password2"
+									onfocus="validatePassword1()" onkeyup="validatePassword2()">
+								<span id="errorPassword2"></span>
 							</div>
-							<button type="submit" class="btn-upper btn btn-primary" onclick="validateForm()">Sign Up</button>
+							<button type="submit" class="btn-upper btn btn-primary" onclick="validateForm()">Sign
+								Up</button>
 						</form>
 						<p style="text-align: center; color:red" id="errorSubmit"></p>
 					</div>
@@ -50,129 +54,129 @@
 </section>
 
 <script>
-	
-     
-let ErrorName=document.getElementById('errorName');
-let ErrorEmail=document.getElementById('errorEmail');
-let ErrorPhoneNumber = document.getElementById('errorPhoneNumber')
-let errorPassword1 = document.getElementById('errorPassword1')
-let errorPassword2 = document.getElementById('errorPassword2')
-let ErrorSubmit=document.getElementById('errorSubmit');
 
-function validatename(){
-    
-    let vname=document.getElementById('name').value;
-    let required=4;
-    let left=required-vname.length;
-	if(vname.length==''||vname.length==null){
-		ErrorName.innerHTML='Fill in Your Name';
-        ErrorName.style.color = "red";
-        return false;
+
+	let ErrorName = document.getElementById('errorName');
+	let ErrorEmail = document.getElementById('errorEmail');
+	let ErrorPhoneNumber = document.getElementById('errorPhoneNumber')
+	let errorPassword1 = document.getElementById('errorPassword1')
+	let errorPassword2 = document.getElementById('errorPassword2')
+	let ErrorSubmit = document.getElementById('errorSubmit');
+
+	function validatename() {
+
+		let vname = document.getElementById('name').value;
+		let required = 4;
+		let left = required - vname.length;
+		if (vname.length == '' || vname.length == null) {
+			ErrorName.innerHTML = 'Fill in Your Name';
+			ErrorName.style.color = "red";
+			return false;
+		}
+
+		if (left > 0) {
+			ErrorName.innerHTML = left + 'More Charecters required';
+			ErrorName.style.color = "red";
+			return false;
+		}
+		// if(!vname.match(/^[A-Za-z]\s{1}[A-Za-z]$/)){
+		//     ErrorName.innerHTML='Write full Name';
+		//     return false;
+		// }
+		ErrorName.innerHTML = 'valid';
+		ErrorName.style.color = "green";
+		return true;
 	}
 
-    if(left>0){
-        ErrorName.innerHTML=left+'More Charecters required';
-        ErrorName.style.color = "red";
-        return false;
-    }    
-    // if(!vname.match(/^[A-Za-z]\s{1}[A-Za-z]$/)){
-    //     ErrorName.innerHTML='Write full Name';
-    //     return false;
-    // }
-    ErrorName.innerHTML='valid';
-    ErrorName.style.color = "green";
-    return true;
-}
+	function validateEmail() {
+		validatename()
+		let vemail = document.getElementById('email').value;
 
-function validateEmail(){    
-	validatename()
-    let vemail=document.getElementById('email').value;
-	
-    
-    if(vemail.length === 0){
-        ErrorEmail.innerHTML='Enter Email Address';
-        ErrorEmail.style.color = "red";
-		return false
-    
-    }  
-    // if(!vemail.match(/^([\-\.0-9a-zA-Z]+)@([\-\..0-9a-zA-Z]+)\.([a-z]){2,7}$/)){
 
-    else if(!vemail.match(/^([\-\.0-9a-zA-Z]+)@([\-\..0-9a-zA-Z]+)\.([a-z]){2,7}$/)){
-        ErrorEmail.innerHTML='Email Invalid';
-        ErrorEmail.style.color = "red";
+		if (vemail.length === 0) {
+			ErrorEmail.innerHTML = 'Enter Email Address';
+			ErrorEmail.style.color = "red";
+			return false
 
-        return false;
-    }
-    ErrorEmail.innerHTML='valid';
-    ErrorEmail.style.color = "green";
-    return true;
-}
+		}
+		// if(!vemail.match(/^([\-\.0-9a-zA-Z]+)@([\-\..0-9a-zA-Z]+)\.([a-z]){2,7}$/)){
 
-function validatePhoneNumber(){
-	validateEmail()
-    let vPhoneNumber = document.getElementById('phoneNumber').value;
-    let required = 10;
-    let left = required - vPhoneNumber.length;
-    if(left>0){
-        ErrorPhoneNumber.innerHTML = 'invalid phone-number';
-        ErrorPhoneNumber.style.color = 'red';
-        return false;
-    }
-    ErrorPhoneNumber.innerHTML = 'valid';
-    ErrorPhoneNumber.style.color = 'green';
-    return true;
-}
+		else if (!vemail.match(/^([\-\.0-9a-zA-Z]+)@([\-\..0-9a-zA-Z]+)\.([a-z]){2,7}$/)) {
+			ErrorEmail.innerHTML = 'Email Invalid';
+			ErrorEmail.style.color = "red";
+
+			return false;
+		}
+		ErrorEmail.innerHTML = 'valid';
+		ErrorEmail.style.color = "green";
+		return true;
+	}
+
+	function validatePhoneNumber() {
+		validateEmail()
+		let vPhoneNumber = document.getElementById('phoneNumber').value;
+		let required = 10;
+		let left = required - vPhoneNumber.length;
+		if (left > 0) {
+			ErrorPhoneNumber.innerHTML = 'invalid phone-number';
+			ErrorPhoneNumber.style.color = 'red';
+			return false;
+		}
+		ErrorPhoneNumber.innerHTML = 'valid';
+		ErrorPhoneNumber.style.color = 'green';
+		return true;
+	}
 
 
 
-function validatePassword1(){
-	validatePhoneNumber()
-	let password1=document.getElementById('password1').value
-	let required = 6;
-    let left = required - password1.length;
-	if(password1.length==''){
-		errorPassword1.innerHTML='Please Enter Your password'
-		errorPassword1.style.color='red'
-		return false
-	}else if(left>0){
-		console .log(left)
-		errorPassword1.innerHTML='Password Must be atleast 6 characters'
-		errorPassword1.style.color='red'
+	function validatePassword1() {
+		validatePhoneNumber()
+		let password1 = document.getElementById('password1').value
+		let required = 6;
+		let left = required - password1.length;
+		if (password1.length == '') {
+			errorPassword1.innerHTML = 'Please Enter Your password'
+			errorPassword1.style.color = 'red'
+			return false
+		} else if (left > 0) {
+			console.log(left)
+			errorPassword1.innerHTML = 'Password Must be atleast 6 characters'
+			errorPassword1.style.color = 'red'
+			return false
+		}
+		errorPassword1.innerHTML = ''
+		return true
+	}
+
+	function validatePassword2() {
+		validatePassword1()
+		let password1 = document.getElementById('password1').value
+		let password2 = document.getElementById('password2').value
+		if (password2.length == '' || password2.length <= 5) {
+			errorPassword2.innerHTML = 'Password Must be atleast 6 characters'
+			errorPassword2.style.color = 'red'
+			return false
+		} else if (password1 != password2) {
+			errorPassword2.innerHTML = 'Password does not match'
+			errorPassword2.style.color = 'red'
+			return false
+		}
+		errorPassword2.innerHTML = ''
+		return true
+	}
+
+
+	function validateForm() {
+
+		if (!validatename() || !validateEmail() || !validatePhoneNumber() || !validatePassword1() || !validatePassword2()) {
+			ErrorSubmit.style.display = 'block';
+			ErrorSubmit.innerHTML = 'Please fix error';
+			event.preventDefault()
+
+			setTimeout(function () { ErrorSubmit.style.display = 'none'; }, 5000);
+			return false;
+		}
 		return false
 	}
-	errorPassword1.innerHTML=''
-	return true
-}	
-
-function validatePassword2(){
-	validatePassword1()
-	let password1=document.getElementById('password1').value
-	let password2=document.getElementById('password2').value
-	if(password2.length==''||password2.length<=5){
-		errorPassword2.innerHTML='Password Must be atleast 6 characters'
-		errorPassword2.style.color='red'
-		return false
-	}else if(password1!=password2){
-		errorPassword2.innerHTML='Password does not match'
-		errorPassword2.style.color='red'
-		return false
-	}
-	errorPassword2.innerHTML=''
-	return true
-}
-
-
-function validateForm(){
-
-    if(!validatename() || !validateEmail() ||!validatePhoneNumber()|| !validatePassword1() || !validatePassword2()){
-        ErrorSubmit.style.display='block';
-        ErrorSubmit.innerHTML='Please fix error';
-		event.preventDefault()
-		
-        setTimeout(function(){ErrorSubmit.style.display='none';},5000);
-        return false;
-    }
-	return false
-}
 
 </script>
