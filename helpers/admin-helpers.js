@@ -1,4 +1,5 @@
 const collection = require('../config/collection');
+require('dotenv').config()
 let db=require('../config/connection')
 const bcrypt=require('bcrypt');
 const { COUPON_COLLECTION } = require('../config/collection');
@@ -7,8 +8,8 @@ const { COUPON_COLLECTION } = require('../config/collection');
 let objectId = require('mongodb').ObjectId
 
 const user={
-  email:'g@123.com',
-  adminpassword:"555555"
+  email:process.env.adminEmail,
+  password:process.env.adminPassword
 }
 
 module.exports={
@@ -17,7 +18,7 @@ module.exports={
             let loginStatus=false
             let response={}
               
-                    if(userData.email===user.email && userData.adminpassword===user.adminpassword){
+                    if(userData.email===user.email && userData.adminpassword===user.password){
                         response.user=user
                         response.status=true
                         resolve(response)

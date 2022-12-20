@@ -530,9 +530,7 @@ await userHelpers.saveAddress(req.body,req.session.user._id).then((response) => 
 res.redirect("/addAddress");
 });
 
-router.get("/address", (req,res) => {
-  res.render("user/address",{user:'user'}); 
-});
+
 
 router.get("/productFilter", async(req, res) => {
   let categories=await productHelpers.getAllCategories()

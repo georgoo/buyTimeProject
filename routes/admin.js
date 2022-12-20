@@ -1,5 +1,6 @@
 let express = require('express');
 const { Db } = require('mongodb');
+require('dotenv').config()
 // const { response } = require('../app');
 const adminHelpers = require('../helpers/admin-helpers');
 const productHelpers = require('../helpers/product-helpers');
@@ -16,8 +17,8 @@ const verifyAdminLogin=(req,res,next)=>{
 }
 
 const credential={
-  email:'george@gmail.com',
-  password:"123456"
+  email:process.env.adminEmail,
+  password:process.env.adminPassword
 }
 
 /* GET users listing. */

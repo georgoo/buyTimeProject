@@ -13,7 +13,7 @@
                             <nav>                                                
                                 <ul id="navigation">  
                                     <li><a href="/">Home</a></li>
-                                    <li><a href="/address">Try ME</a></li>
+                                    
                                    
                                     {{#if usersession}}
                                     <li><a href="/orders/?page=1">Orders</a></li>
@@ -26,11 +26,11 @@
                         <!-- Header Right -->
                         <div class="header-right">
                             <ul>
-                                <li>
+                                {{!-- <li>
                                     <div class="nav-search search-switch">
                                         <span class="flaticon-search"></span>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <li><a href="/cart"><span class="flaticon-shopping-cart"><p class="badge badge-primary" id="cart-count"> {{cartCount}} </p></span></a> </li>
                                 {{#if usersession}}
                                
