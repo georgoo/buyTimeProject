@@ -34,9 +34,13 @@ const verifyLogin = (req, res, next) => {
 router.get("/", async function (req, res, next) {
   let usersession = req.session.user;
   let cartCount = null;
+  let wishList =null
   if (req.session.user) {
     cartCount = await userHelpers.getCartCount(req.session.user._id);
+     wishList = await userHelpers.getWishlistIds(req.session.user._id)
+  console.log(wishList,"wishList");
   }
+  
   let banners = await productHelpers.getBanners()
   productHelpers.getAllProducts().then((products) => {
     res.render("user/index", {
@@ -45,6 +49,7 @@ router.get("/", async function (req, res, next) {
       usersession,
       cartCount,
       banners,
+      wishList
     });
   });
 });
@@ -239,8 +244,8 @@ router.get("/add-to-wishlist/:id", verifyLogin, (req, res) => {
 });
 // Remove product from wishlist
 router.get("/removeFromWishlist/:id", (req, res) => {
-  userHelpers.removeFromWishList(req.body,req.params.id)
-  console.log(req.body);
+  userHelpers.removeFromWishList(req.session.user._id,req.params.id)
+  console.log(req.session.user._id,"ksjafoijik");
   res.redirect("/wishlist")
 });
 
@@ -258,7 +263,8 @@ router.get("/placeOrder", verifyLogin, async (req, res) => {
   
   let addresses = await userHelpers.getAddress(req.session.user._id)
   let total = await userHelpers.getTotalAmount(req.session.user._id);
-  let savedAmount=0
+  let savedAmount = 0
+  let discountPrice=0
   let originalPrice=await userHelpers.getTotalMRP(req.session.user._id);
   let walletAmount = await userHelpers.getWalletAmount(req.session.user._id);
  
@@ -272,12 +278,15 @@ router.get("/placeOrder", verifyLogin, async (req, res) => {
   if (req.session.coupon) {
     coupon = req.session.coupon
   }
-  
+  savedAmount=originalPrice-total
   console.log(req.session.user);
-  let discountPrice = await userHelpers.getCouponAppliedPrice(req.session.user._id, total)
+  if (req.session.discountPrice) {
+    discountPrice = req.session.discountPrice;
+  }
+   
 
   console.log(discountPrice,"haaa");
-  res.render("user/checkout", { user: req.session.user,user, usersession,total,addresses, coupon,walletAmount,originalPrice,savedAmount});
+  res.render("user/checkout", { user: req.session.user,user, usersession,total,addresses, coupon,walletAmount,originalPrice,savedAmount,discountPrice});
 });
 
 //Gets Add address Page
@@ -290,6 +299,7 @@ router.post("/place-order", async (req, res) => {
   console.log('body');
   console.log(req.body);
   console.log('body');
+  let discountPrice=0
   let address = await userHelpers.getSelectedAddress(req.body.addressId)
   let products = await userHelpers.getCartProductList(req.session.user._id);
   let totalPrice = await userHelpers.getTotalAmount(req.session.user._id);
@@ -298,6 +308,9 @@ router.post("/place-order", async (req, res) => {
   if (req.session.totalPrice) {
     totalPrice = req.session.totalPrice;
   }
+  if (req.session.discountPrice) {
+    discountPrice = req.session.discountPrice;
+  }
   
   if (req.body["payment-method"] == "WALLET" && walletTotal < totalPrice) {
     
@@ -305,7 +318,7 @@ router.post("/place-order", async (req, res) => {
     
   } else{
   
-  userHelpers.placeOrder(req.body, address, products, totalPrice, req.session.user._id).then(async(orderId) => {
+  userHelpers.placeOrder(req.body, address, products, totalPrice, req.session.user._id,discountPrice).then(async(orderId) => {
    
     if (req.body["payment-method"] == "COD") {
       res.json({ codSuccess: true });
@@ -353,6 +366,7 @@ router.get("/order-success", verifyLogin, (req, res) => {
   req.session.totalPrice = false
   req.session.coupon = false
   req.session.savedAmount = false
+  req.session.discountPrice=false
   
   res.render("user/orderSuccess", { user: req.session.user });
 });
@@ -374,13 +388,14 @@ router.get("/orders",verifyLogin, async (req, res) => {
 router.get("/view-order-products/:id", verifyLogin, async (req, res) => {
   orderId=req.params.id
   let usersession = req.session.user;
+  let order = await userHelpers.getOrderdetails(orderId)
   let products = await userHelpers.getOrderProducts(orderId);
   console.log(orderId,"orderId");
-  res.render("user/view-order-products", {
+  res.render("user/product-Detailscopy", {
     user: req.session.user,
     products,
     usersession,
-    orderId
+    orderId,order
   });
 });
 
@@ -557,6 +572,7 @@ router.post("/applyCoupon", verifyLogin, async (req, res) => {
     let coupon = await userHelpers.applyCoupon(req.body, cartTotal, req.session.user._id)
     req.session.totalPrice = coupon.totalPriceAfterOffer;
     req.session.savedAmount = coupon.savedAmount;
+    req.session.discountPrice = coupon.discountPrice;
     req.session.coupon = coupon
     console.log(coupon);
     req.session.couponId=coupon.couponId;

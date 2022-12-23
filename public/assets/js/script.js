@@ -37,9 +37,20 @@ function addToWishList(proId){
     $.ajax({
         url:'/add-to-wishlist/'+proId,
         method:'get',
-        success:(response=>{
-            alert(response)
+        success: (response => {
+            if (document.getElementById('wishlistColor'+proId).style.color == 'red') {
+                document.getElementById('wishlistColor'+proId).style.color='white'
+            } else {
+                document.getElementById('wishlistColor'+proId).style.color='red'
+            }
         })
     })
 }
+
+// const icon = document.querySelector('.fa-heart');
+
+// icon.addEventListener('click', () => {
+//   icon.classList.toggle('selected');
+// });
+
 

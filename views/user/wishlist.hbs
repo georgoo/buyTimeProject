@@ -5,9 +5,9 @@
                 {{#each wishItems}}
                 <div class="col-md-3 p-3">
                     <div class="card" style="width: 15rem;height: 24rem;">
-                           <img src="/images/product-images/{{this.product.img.[0]}}"
+                          <a href="/productDetails/{{this.product._id}}""> <img src="/images/product-images/{{this.product.img.[0]}}"
                             alt="card-img-cap" class="card-img-top"
-                             style="height:12rem ;">
+                             style="height:12rem ;"></a>
                           <div class="card-body">
                             <h5 class="card-title">{{this.product.Name}}</h5>
                             <h5 class="card-text">Rs. {{this.product.Price}}</h5>

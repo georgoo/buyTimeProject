@@ -13,25 +13,32 @@
                                             </a>
                                         </figure><!-- End .product-main-image -->
 
-                                        <div id="product-zoom-gallery" class="product-image-gallery">
-                                            <a class="product-gallery-item active" href="#" data-image="/images/product-images/{{product.img.[0]}}" data-zoom-image="/images/product-images/{{product.img.[0]}}">
-                                                <img id="product-zoom" src="/images/product-images/{{product.img.[0]}}" alt="product side">
+                                        <div id="product-zoom-gallery"   class="product-image-gallery">
+                                            {{#if product.img.[0]}}
+                                            <a  class="product-gallery-item active" href="#" data-image="/images/product-images/{{product.img.[0]}}" data-zoom-image="/images/product-images/{{product.img.[0]}}">
+                                                <img   src="/images/product-images/{{product.img.[0]}}" alt="product side">
                                             </a>
-
+                                            {{/if}}
+                                            {{#if product.img.[1]}}
                                             <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[1]}}" data-zoom-image="/images/product-images/{{product.img.[1]}}">
                                                 <img src="/images/product-images/{{product.img.[1]}}" alt="product cross">
                                             </a>
-
+                                            {{/if}}
+                                            {{#if product.img.[2]}}
                                             <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[2]}}" data-zoom-image="/images/product-images/{{product.img.[2]}}">
                                                 <img src="/images/product-images/{{product.img.[2]}}" alt="product cross">
                                             </a>
-
+                                            {{/if}}
+                                            {{#if product.img.[3]}}
                                             <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[3]}}" data-zoom-image="/images/product-images/{{product.img.[3]}}">
                                                 <img src="/images/product-images/{{product.img.[3]}}" alt="product with model">
                                             </a>
+                                            {{/if}}
+                                            {{#if product.img.[4]}}
                                             <a class="product-gallery-item" href="#" data-image="/images/product-images/{{product.img.[4]}}" data-zoom-image="/images/product-images/{{product.img.[4]}}">
                                                 <img src="/images/product-images/{{product.img.[4]}}" alt="product with model">
                                             </a>
+                                            {{/if}}
 
                                             
                                         </div><!-- End .product-image-gallery -->
@@ -86,7 +93,7 @@
                                        <button onclick="addToCart('{{product._id}}')" class="btn btn-danger">Add to cart</button>
 
                                         <div class="details-action-wrapper">
-                                       <button onclick="addToWishList('{{this._id}}')" class="btn btn-danger">Add to Wishlist</button>
+                                       <button onclick="addToWishList('{{product._id}}')" class="btn btn-danger">Add to Wishlist</button>
                                            
                                         </div><!-- End .details-action-wrapper -->
                                     </div><!-- End .product-details-action -->
@@ -105,11 +112,8 @@
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
 
-            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+            
 
-<script>
-    $("#product-zoom").ezPlus();
-</script>
+
 
 

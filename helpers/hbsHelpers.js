@@ -32,7 +32,22 @@ module.exports={
       }else{
         return parseInt(index)+1;
       }
-    },
+  },
+  wishlistHeartIcon: (productId, wishlistArray, options) => {
+    if (wishlistArray!=null) {
+        function doesAnyWishlistIdMatch(wishlist){
+            return productId.toString() == wishlist.item
+        }
+        if(wishlistArray.some(doesAnyWishlistIdMatch)){
+            return options.fn()
+        }else{
+            return options.inverse();   
+        }
+    }else{
+        return options.inverse();   
+    }
+    
+},
     
     
    

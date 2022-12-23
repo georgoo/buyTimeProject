@@ -10471,7 +10471,6 @@ button:focus {
   background-color: #c96;
 }
 .product-image-gallery {
-  display: flex;
   flex-flow: row wrap;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
@@ -10507,7 +10506,6 @@ button:focus {
 .product-gallery-item:before {
   opacity: 0;
   visibility: hidden;
-  border: 0.1rem solid #c96;
 }
 .product-gallery-item:after {
   visibility: visible;

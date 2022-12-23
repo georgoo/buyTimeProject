@@ -14,7 +14,7 @@
         <h4>Enter the Coupon Code</h4>
       </label><br>
       <input type="text" id="couponId" name="coupon">
-      <button onclick="applyCoupon()" type="submit" id="applyButton" class="btn-success">Apply</button>
+      <button  type="submit" id="applyButton" class="btn-success">Apply</button>
       {{/ifEquals}}
       <p id="errorCoupon" class=" text-danger display:none"></p>
     </form>
@@ -47,13 +47,15 @@
 
         <div class="col-md-4">
           <div class="container   checkout">
-            <h5>Total Amount: Rs. <span>{{originalPrice}}</span> </h5>
+            <h5>Price <span>{{originalPrice}}</span> </h5>
             <input type="text" value={{originalPrice}} name="originalPrice" hidden>
-            <h5>You've Saved: Rs. <span id="savedAmount">{{savedAmount}}</span> </h5>
+            {{!-- <h5>Coupon Discount: Rs. <span id="discountPrice">{{discountPrice}}</span> </h5> --}}
+            <input type="text" value={{discountPrice}} name="discountPrice" hidden>
+             <h5>Discount: Rs. <span id="savedAmount">{{savedAmount}}</span> </h5>
             <input type="text" value={{savedAmount}} name="savedAmount" hidden>
             <hr />
 
-            <h5>You have to pay: Rs. <span id="totalvalue">{{total}}</span> </h5>
+            <h5>Total Amount <span id="totalvalue">{{total}}</span> </h5>
             <input type="text" value={{total}} name="totalValue" hidden>
 
             <hr />
@@ -112,7 +114,7 @@
             document.getElementById("totalvalue").innerHTML = Math.round(totalPriceAfterOffer)
             document.getElementById("savedAmount").innerHTML = Math.round(discountPrice)
             swal(response.couponAppliedMessage, "", "success")
-            setTimeout(location.reload.bind(location), 1500);
+            setTimeout(location.reload.bind(location), 1000);
 
           }
         } else if (response.couponNotFound) {

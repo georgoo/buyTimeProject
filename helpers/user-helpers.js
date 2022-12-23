@@ -203,9 +203,10 @@ module.exports = {
           db.get()
             .collection(collection.WISHLIST_COLLECTION)
             .updateOne(
-              { user: objectId(userId), "products.item": objectId(proId) },
-              {
-                $inc: { "products.$.quantity": 1 },
+              { user: objectId(userId) }, {
+                $pull: {
+                  products:{item:objectId(proId)}
+                }
               }
             )
             .then(() => {
@@ -441,10 +442,11 @@ module.exports = {
     return new Promise(() => {});
   },
 
-  placeOrder: (order, address, products, total, userId) => {
+  placeOrder: (order, address, products, total, userId,couponDiscountAmount) => {
     console.log(order, "The oreer");
     console.log(total);
     console.log(address);
+    let pricebeforeCoupon=order.originalPrice-(order.savedAmount-couponDiscountAmount)
     let d = new Date();
     let month = "" + (d.getMonth() + 1);
     let day = "" + d.getDate();
@@ -471,7 +473,9 @@ module.exports = {
         totalAmount: parseInt(total),
         status: status,
         originalPrice:order.originalPrice,
-        savedAmount:order.savedAmount,
+        savedAmount: order.savedAmount,
+        pricebeforeCoupon:pricebeforeCoupon,
+        couponDiscountAmount:parseInt(couponDiscountAmount),
         date: time,
         month: monthofbusiness,
         year: yearofbusiness,
@@ -660,6 +664,15 @@ module.exports = {
         });
     });
   },
+  getWishlistIds: (userId) => {
+    return new Promise(async(resolve, reject) => {
+      let wishlists = await db.get().collection(collection.WISHLIST_COLLECTION).find({ user: objectId(userId) }, { products:1 }).toArray()
+      console.log('wishlists')
+      console.log(wishlists[0].products)
+      console.log('wishlists')
+      resolve(wishlists[0].products)
+    })
+  },
 
   getWishlistItems: (userId) => {
     return new Promise(async (resolve, reject) => {
@@ -741,7 +754,7 @@ module.exports = {
       db.get()
         .collection(collection.WISHLIST_COLLECTION)
         .updateOne(
-          { _id: objectId(wishlist) },
+          { user: objectId(wishlist) },
           {
             $pull: {
               products: { item: objectId(proId) },
@@ -827,65 +840,6 @@ module.exports = {
         reject(response);
       }
     });
-  },
-
-  getCouponAppliedPrice: (userId, total) => {
-    console.log(userId);
-    console.log(total,"total");
-    let tot = parseInt(total)
-
-      return new Promise((resolve, reject) => {
-          db.get().collection(collection.CART_COLLECTION).aggregate(
-              [
-                  { $match: { user: objectId(userId) } },
-
-
-                  {
-                      $lookup:
-                      {
-                          from: collection.USER_COLLECTION,
-                          localField: 'user',
-                          foreignField: '_id',
-                          as: 'usrdetails'
-                      }
-                  },
-                  {
-                      $project: { userdetails: { $arrayElemAt: ['$usrdetails', 0] } }
-                  },
-                  {
-                      $lookup:
-                      {
-                          from: 'coupon',
-                          localField: 'userdetails.couponId',
-                          foreignField: '_id',
-                          as: 'Coupondetails'
-                      }
-                  },
-                  {
-                      $project: { Coupondetail: { $arrayElemAt: ['$Coupondetails', 0] }, userdetails: 1 }
-                  },
-                  {
-                      $project: {
-                          discountedPrice: { $round: [{ $multiply: [{ $divide: ['$Coupondetail.couponvalue', 100] }, tot] }, 0] },
-                          userdetails: 1,
-                          Coupondetails: 1
-                      }
-                  },
-                  {
-                      $project: {
-                          TotalAfterDiscount: { $subtract: [tot, '$discountedPrice'] },
-                          discountedPrice: 1,
-                          Coupondetails: 1
-                      }
-                  },
-              ]).toArray().then((find) => {
-
-
-                resolve(find)
-                console.log(find);
-          })
-
-       })
   },
 
   cancelOrder: (orderId) => {

@@ -20,7 +20,8 @@ const hbs = expbs.create({
   helpers:{
     ifEquals: hbsHelpers.ifEquals,
     indexing: hbsHelpers.indexing,
-    ifNotEquals:hbsHelpers.ifNotEquals
+    ifNotEquals: hbsHelpers.ifNotEquals,
+    wishlistHeartIcon:hbsHelpers.wishlistHeartIcon,
   }
 })
 

@@ -28,7 +28,7 @@ function addToWishList(proId){
         url:'/add-to-wishlist'+proId,
         method:'get',
         success:(response=>{
-            alert(response)
+            
         })
     })
 }

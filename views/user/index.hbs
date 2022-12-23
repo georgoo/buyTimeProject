@@ -1,8 +1,8 @@
 <!--? Preloader Start -->
 
 <!-- Preloader Start -->
-
-
+<link rel="stylesheet" href="/assets/css/global.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <main>
     <!--? slider Area Start -->
     <div class="slider-area ">
@@ -211,9 +211,15 @@
 
                                 <button onclick="addToCart('{{this._id}}')" class="btn btn-danger">Add to cart</button>
                             </div>
+                            {{#wishlistHeartIcon this._id ../wishList}}
                             <div class="favorit-items">
-                                <span onclick="addToWishList('{{this._id}}')" class="flaticon-heart"></span>
+                                <span onclick="addToWishList('{{../this._id}}')"><i id="wishlistColor{{../this._id}}" style="color: red ;" class="fa-solid fa-heart"></i></span>
                             </div>
+                            {{else}}
+                            <div class="favorit-items">
+                                <span onclick="addToWishList('{{../this._id}}')"><i id="wishlistColor{{../this._id}}" style="color: white " class="fa-solid fa-heart"></i></span>
+                            </div>
+                            {{/wishlistHeartIcon}}
                         </div>
                         <div class="popular-caption">
                             <h3><a href="/productDetails/{{this._id}}">{{this.Name}}</a></h3>
@@ -334,3 +340,22 @@
         </form>
     </div>
 </div>
+
+
+
+{{!-- <script>
+function addToWishList(proId){
+    $.ajax({
+        url:'/add-to-wishlist/'+proId,
+        method:'get',
+        success: (response => {
+            
+            if (document.getElementById('wishlistColor'+proId).style.color == 'red') {
+                document.getElementById('wishlistColor'+proId).style.color='white !important'
+            } else {
+                document.getElementById('wishlistColor'+proId).style.color='red !important'
+            }
+        })
+    })
+}
+</script> --}}

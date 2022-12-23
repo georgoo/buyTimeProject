@@ -17,6 +17,7 @@
 
                      <label for="" col-form-label>Category</label>
                     <select class="form-control selectric" name="category">
+                        <option  value="{{product.category}}">{{product.category}}</option>
                         {{#each categories}}
                         <option id="categories{{this._id}}" value="{{this.name}}">{{this.name}}</option>
                         {{/each}}
