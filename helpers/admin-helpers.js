@@ -416,6 +416,36 @@ module.exports={
       console.log(response,"paymentMethodcount");
       resolve(response)
     })
-  }
+  },
+
+  getPaymentGraph: ()=>{
+    return new Promise(async(resolve, reject)=>{
+        let totalPayments = await db.get().collection(collection.ORDER_COLLECTION).countDocuments({
+            status : {$nin: ['Cancelled']}
+        })
+
+        let totalCOD = await db.get().collection(collection.ORDER_COLLECTION).countDocuments({
+            paymentMethod: 'COD', status: {$nin: ['Cancelled', 'pending']}
+        })
+
+        let totalUPI = await db.get().collection(collection.ORDER_COLLECTION).countDocuments({
+            paymentMethod: 'RAZORPAY', status: {$nin: ['Cancelled', 'pending']}
+        })
+
+        let totalPaypal = await db.get().collection(collection.ORDER_COLLECTION).countDocuments({
+            paymentMethod: 'PAYPAL', status: {$nin: ['Cancelled', 'pending']}
+        })
+
+        let percentageCOD = Math.round(totalCOD/totalPayments*100);
+        let percentageUPI = Math.round(totalUPI/totalPayments*100);
+        let percentagePaypal = Math.round(totalPaypal/totalPayments*100);
+        console.log("totalPayments, totalCOD, totalUPI, totalPaypal")
+
+      console.log(totalPayments, totalCOD, totalUPI, totalPaypal)
+      console.log("totalPayments, totalCOD, totalUPI, totalPaypal")
+      
+        resolve({percentageCOD, percentageUPI, percentagePaypal})
+    })
+},
 
 }

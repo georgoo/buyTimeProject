@@ -12,21 +12,48 @@ const verifyAdminLogin=(req,res,next)=>{
   if(req.session.aloggedIn){
     next()
   }else{
-    res.redirect('/admin')
+    res.redirect('/admin/login')
   }
 }
 
+const verifyNotAdminLogin=(req,res,next)=>{
+  if(req.session.aloggedIn){
+    res.redirect('/admin')
+  }else{
+    next()
+  }
+}
 const credential={
   email:process.env.adminEmail,
   password:process.env.adminPassword
 }
 
+router.get('/login',verifyNotAdminLogin, (req, res) => {
+  res.render('admin/adminLogin')
+})
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.get('/', async function(req, res) {
   if (req.session.aloggedIn){
-    res.render('admin/charts',{admin:true})
+    
+      let re=await adminHelpers.getTotalSalesGraph()
+      let { dailySale, monthSales, yearlySale } =re
+      let todaySale = await  adminHelpers.getTodaySales()
+      let totalusers = await adminHelpers.getAllUsers()
+      let getMonthlyAmount = await adminHelpers.getMonthlyTotal()
+    let paymentsReport = await adminHelpers.getPaymentGraph();
+    let {percentageCOD, percentageUPI, percentagePaypal} = paymentsReport
+    console.log("paymentsReport");
+    console.log(paymentsReport);
+    console.log("paymentsReport");
+
+      let paymentmethodsCount= await adminHelpers.getPaymentMethodCount()
+      console.log(todaySale,"todaySale");
+      console.log(totalusers,"totalusers");
+      console.log(getMonthlyAmount,"totalusers");
+      res.render('admin/charts',{admin:true,todaySale,totalusers,getMonthlyAmount,dailySale,monthSales,yearlySale,percentageCOD, percentageUPI, percentagePaypal});   
   }else{  
-    res.render('admin/adminLogin',{'aloginErr':req.session.aloginErr});
+    // res.render('admin/adminLogin',{'aloginErr':req.session.aloginErr});
+    res.redirect('/admin/login')
     req.session.aloginErr=false
   } 
 });
@@ -41,24 +68,14 @@ router.post('/adminLogin', function (req, res) {
   console.log("njnnk");
   adminHelpers.adminLogin(req.body).then(async(response) => {
     console.log(response,"kniknk");
-    if(response.status){
+    if (response.status) {
       req.session.admin=response.user
       req.session.aloggedIn = true
-      let re=await adminHelpers.getTotalSalesGraph()
-      let { dailySale, monthSales, yearlySale } =re
-      let todaySale = await  adminHelpers.getTodaySales()
-      let totalusers = await adminHelpers.getAllUsers()
-      let getMonthlyAmount = await adminHelpers.getMonthlyTotal()
-
-      let paymentmethodsCount= await adminHelpers.getPaymentMethodCount()
-      console.log(todaySale,"todaySale");
-      console.log(totalusers,"totalusers");
-      console.log(getMonthlyAmount,"totalusers");
-      res.render('admin/charts',{admin:true,todaySale,totalusers,getMonthlyAmount,dailySale,monthSales,yearlySale});    
+      res.redirect('/admin')    
     }else{
       req.session.aloginErr='Invalid Username or PassWord'
       req.session.aloggedIn=false
-      res.redirect('/admin')
+      res.redirect('/admin/login')
     }
   })
 });
@@ -67,7 +84,7 @@ router.post('/adminLogin', function (req, res) {
 router.get('/adminLogout', (req, res) => {
   delete req.session.admin
   req.session.aloggedIn = null
-  res.redirect('/admin/')
+  res.redirect('/admin/login')
 
 })
 //GET the products Page 
