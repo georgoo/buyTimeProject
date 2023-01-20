@@ -18,6 +18,7 @@ module.exports={
         }
         let categoryName = product.category
         category = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({ name: categoryName })
+        product.categoryId= category._id
         if(category.categoryOffer){
             product.categoryOfferPercentage = parseInt(category.categoryOffer)
             product.categoryOffer=true
@@ -83,10 +84,6 @@ module.exports={
     getProductsCount: () => {
         return new Promise(async(resolve,reject)=>{
             let count=await db.get().collection(collection.PRODUCT_COLLECTION).count()
-            
-            console.log("?????");
-            console.log(count)
-    
             resolve(count)
     
     
@@ -110,12 +107,9 @@ module.exports={
     },
 
     updateProduct: async(proId, proDetails) => {
-        console.log(proDetails);
-
         return new Promise(async (resolve, reject) => {
             let categoryName= proDetails.category
             let category = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({ name: categoryName })
-            console.log(category._id,"category");
             db.get().collection(collection.PRODUCT_COLLECTION)
             .updateOne({_id:objectId(proId)},{
                 $set:{
@@ -245,7 +239,6 @@ module.exports={
     getCategoryCount: () => {
         return new Promise(async(resolve,reject)=>{
             let count=await db.get().collection(collection.CATEGORY_COLLECTION).count() 
-            console.log(count)
             resolve(count)
 
         })  
@@ -254,7 +247,6 @@ module.exports={
     getBrandCount: () => {
         return new Promise(async(resolve,reject)=>{
             let count=await db.get().collection(collection.BRAND_COLLECTION).count() 
-            console.log(count)
             resolve(count)
 
         })  
@@ -264,7 +256,6 @@ module.exports={
     getCouponCount: () => {
         return new Promise(async(resolve,reject)=>{
             let count=await db.get().collection(collection.COUPON_COLLECTION).count() 
-            console.log(count)
             resolve(count)
 
         })  
@@ -273,14 +264,13 @@ module.exports={
     getBannerCount: () => {
         return new Promise(async(resolve, reject) => {
             let count=await db.get().collection(collection.BANNER_COLLECTION).count() 
-            console.log(count)
             resolve(count)
         })
     },
     getOrderCount: () => {
         return new Promise(async(resolve, reject) => {
             let count=await db.get().collection(collection.ORDER_COLLECTION).count() 
-            console.log(count)
+  
             resolve(count)
         })
     },
@@ -386,9 +376,6 @@ module.exports={
                 }
               },
               ]).toArray().then((response)=>{
-           
-          
-                // console.log(response);
                 resolve(response)
                 
             })
@@ -396,11 +383,7 @@ module.exports={
     },
 
     updateStockDecrease:({productId,quantity})=>{
-        console.log(productId);
-
         return new Promise(async(resolve, reject)=>{
-            console.log('into int');
-            console.log(quantity);
             quantity=parseInt(quantity)
     
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(productId)},{
@@ -410,29 +393,23 @@ module.exports={
     
     },
     updateStockIncrease: ({ productId, quantity }) => {
-        console.log("function called")
         return new Promise((resolve,reject)=>{
               db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(productId)}, {
               $inc: {Stock: quantity}
               }).then(() => {
               resolve()
-                console.log("resolved")
               })
     
         })
     },
     
     getPaginatedResult: (page, count) => {
-        console.log(page,"page");
-        console.log(count,"pag");
         return new Promise(async(resolve, reject) => {
             // const page = parseInt(req.query.page) 
             const limit =7
             const startIndex = parseInt(page - 1) * limit
             const endIndex = page * limit
             const results = {}
-            console.log('##');
-            console.log(startIndex, endIndex);
             // let userCount = await userHelpers.getUserCount()
             if (endIndex < count) {
               results.next = {
@@ -447,47 +424,39 @@ module.exports={
                 limit: limit
               }
           
-              console.log("stattIndex");
-              console.log(startIndex);
             } 
 
             results.pageCount =Math.ceil(parseInt(count)/parseInt(limit)).toString() 
     results.pages =Array.from({length: results.pageCount}, (_, i) => i + 1)    
     results.currentPage =page.toString()
             
-            console.log(results,"lpppppp");
+            
             resolve({limit,startIndex,results})
         })
     },
 
     getCategoriesForUserSide: (orderIds) => {
-        console.log(orderIds,"orderIdsorderIdsorderIds");
         return new Promise(async (resolve, reject) => {
             if (Array.isArray(orderIds)) {
                 orderIds.forEach(convert);
                 function convert(item, index, arr) {
                     arr[index] = objectId(item)
                 }
-                console.log("-=-=-=-=-=-=-=-=-=-=-=-=");
-                console.log(orderIds);
-                console.log("-=-=-=-=-=-=-=-=-=-=-=-=");
+
 
                 let categories = await db.get().collection(collection.PRODUCT_COLLECTION).find({
                     categoryId: { $in: orderIds }
                 }).toArray()
-                console.log(categories);
+                
                 resolve(categories)
             }else {
                 // let filterArray = filterItems;
                 let filterData = objectId(orderIds)
-                console.log("==========================");
-                console.log(filterData);
-                console.log("==========================");
+
 
                 let categories = await db.get().collection(collection.PRODUCT_COLLECTION).find({
                     categoryId: { $in: [filterData] }
                 }).toArray()
-                console.log(categories);
                 resolve(categories)
             }
             

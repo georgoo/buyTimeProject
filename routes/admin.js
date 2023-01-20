@@ -42,14 +42,8 @@ router.get('/', async function(req, res) {
       let getMonthlyAmount = await adminHelpers.getMonthlyTotal()
     let paymentsReport = await adminHelpers.getPaymentGraph();
     let {percentageCOD, percentageUPI, percentagePaypal} = paymentsReport
-    console.log("paymentsReport");
-    console.log(paymentsReport);
-    console.log("paymentsReport");
 
       let paymentmethodsCount= await adminHelpers.getPaymentMethodCount()
-      console.log(todaySale,"todaySale");
-      console.log(totalusers,"totalusers");
-      console.log(getMonthlyAmount,"totalusers");
       res.render('admin/charts',{admin:true,todaySale,totalusers,getMonthlyAmount,dailySale,monthSales,yearlySale,percentageCOD, percentageUPI, percentagePaypal});   
   }else{  
     // res.render('admin/adminLogin',{'aloginErr':req.session.aloginErr});
@@ -65,9 +59,7 @@ router.get('/', async function(req, res) {
 
 //Submit Login Page
 router.post('/adminLogin', function (req, res) {
-  console.log("njnnk");
   adminHelpers.adminLogin(req.body).then(async(response) => {
-    console.log(response,"kniknk");
     if (response.status) {
       req.session.admin=response.user
       req.session.aloggedIn = true
@@ -117,8 +109,6 @@ router.get('/viewUsers',verifyAdminLogin, async function (req, res) {
 router.get('/addproducts', async(req, res )=> {
   let categories = await productHelpers.getAllCategories()
   let brands = await productHelpers.getAllBrands()
-  console.log(brands);
-  console.log(categories);
   res.render('admin/add-product', { admin: 'admin', categories, brands, addProductMessage: req.session.addProductMessage });
   req.session.addProductMessage=false
 });
@@ -147,14 +137,12 @@ router.get('/edit-product/:id', async (req, res) => {
   let brands=await productHelpers.getAllBrands()
   let categories = await productHelpers.getAllCategories()
   let product = await productHelpers.getProductDetails(req.params.id)
-  console.log(product);
   res.render('admin/edit-product',{admin:'admin',product,categories,brands})
 })
 //Submits the edit Product page
 router.post('/edit-product/:id', upload.array('image'), async (req, res) => {
   try {
     let oldProductDetails = await productHelpers.getProductDetails(req.params.id)
-    console.log(oldProductDetails,"old");
     const file = req.files
     let filename
     req.body.img =(req.files.length!=0) ? (filename = file.map((file)=>{ return file.filename })) : oldProductDetails.img
@@ -163,10 +151,8 @@ router.post('/edit-product/:id', upload.array('image'), async (req, res) => {
       req.session.editProductMessage = "Product Edited SuccessFully"
       res.redirect('/admin/viewproducts'); 
     }).catch(error=>{
-      console.log(error);
     })   
   } catch (error) {
-    console.log(error)
   }
 })
 
@@ -205,7 +191,6 @@ router.post('/addCategory',(req,res)=>{
 
 router.get("/editCategory/:id", async (req, res) => {
   let category = await productHelpers.getCategoryDetails(req.params.id)
-  console.log(category,"Cat");
   res.render("admin/editCategory", { admin: "admin", category})
   
  })
@@ -371,7 +356,6 @@ router.get("/deleteBanner/:id", async(req, res) => {
 
 router.get("/salesReport",verifyAdminLogin, async(req, res) => {
   let salesReport = await adminHelpers.getSalesReport()
-  console.log(salesReport, "iji");
   let monthlyReport = await adminHelpers.getMonthlyReport()
   let yearlyReport = await adminHelpers.getYearlyReport()
   let { weeklyReport} = salesReport
@@ -384,10 +368,8 @@ router.post("/updateOrderStatus/:id", (req, res) => {
 })
 
 router.get("/view-orders/:id",verifyAdminLogin, async(req, res) => {
-  console.log(req.params.id);
   orderDetails = await adminHelpers.getOrderDetails(req.params.id)
   orderedProducts = await userHelpers.getOrderProducts(req.params.id)
-  console.log(orderedProducts,"orderedProductsorderedProducts");
   res.render("admin/orderDetails",{admin:"admin",orderDetails,orderedProducts})
 })
 

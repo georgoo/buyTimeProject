@@ -413,7 +413,6 @@ module.exports={
         ]).toArray()
       response.WALLET = await db.get().collection(collection.ORDER_COLLECTION).find({ paymentMethod: "WALLET" }).count()
       response.PAYPAL = await db.get().collection(collection.ORDER_COLLECTION).find({ paymentMethod: "PAYPAL" }).count()
-      console.log(response,"paymentMethodcount");
       resolve(response)
     })
   },
@@ -439,11 +438,6 @@ module.exports={
         let percentageCOD = Math.round(totalCOD/totalPayments*100);
         let percentageUPI = Math.round(totalUPI/totalPayments*100);
         let percentagePaypal = Math.round(totalPaypal/totalPayments*100);
-        console.log("totalPayments, totalCOD, totalUPI, totalPaypal")
-
-      console.log(totalPayments, totalCOD, totalUPI, totalPaypal)
-      console.log("totalPayments, totalCOD, totalUPI, totalPaypal")
-      
         resolve({percentageCOD, percentageUPI, percentagePaypal})
     })
 },
